@@ -41,7 +41,7 @@ import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.data.ChangeSetD
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.client.api.chatgpt.ChatGptClientStateful;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.client.api.gerrit.GerritClientPatchSetStateful;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.client.api.git.GitRepoFiles;
-import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.api.chatgpt.ChatGptClientStateless;
+import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.api.chatai.ChatAIClientStateless;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.api.gerrit.GerritClientPatchSetStateless;
 import lombok.NonNull;
 import org.junit.Before;
@@ -390,7 +390,7 @@ public class ChatGptReviewTestBase extends ChatGptTestBase {
     private IChatGptClient getChatGptClient() {
         return switch (config.getGptMode()) {
             case stateful -> new ChatGptClientStateful(config, gitRepoFiles, pluginDataHandlerProvider);
-            case stateless -> new ChatGptClientStateless(config);
+            case stateless -> new ChatAIClientStateless(config);
         };
     }
 

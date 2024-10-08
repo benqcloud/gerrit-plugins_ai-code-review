@@ -13,7 +13,7 @@ import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.gerrit.Ger
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.data.ChangeSetData;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.client.api.chatgpt.ChatGptClientStateful;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.client.api.gerrit.GerritClientPatchSetStateful;
-import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.api.chatgpt.ChatGptClientStateless;
+import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.api.chatai.ChatAIClientStateless;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.api.gerrit.GerritClientPatchSetStateless;
 
 import static com.google.inject.Scopes.SINGLETON;
@@ -41,7 +41,7 @@ public class GerritEventContextModule extends FactoryModule {
     private Class<? extends IChatGptClient> getChatGptMode() {
         return switch (config.getGptMode()){
             case stateful -> ChatGptClientStateful.class;
-            case stateless -> ChatGptClientStateless.class;
+            case stateless -> ChatAIClientStateless.class;
         };
     }
 
