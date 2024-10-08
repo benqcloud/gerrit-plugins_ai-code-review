@@ -37,7 +37,7 @@ public class ChatGptVectorStore extends ClientBase {
     }
 
     private Request vectorStoreCreateRequest() {
-        URI uri = URI.create(config.getGptDomain() + UriResourceLocatorStateful.vectorStoreCreateUri());
+        URI uri = URI.create(config.getAIDomain() + UriResourceLocatorStateful.vectorStoreCreateUri());
         log.debug("ChatGPT Create Vector Store request URI: {}", uri);
 
         ChatGptCreateVectorStoreRequest requestBody = ChatGptCreateVectorStoreRequest.builder()
@@ -46,6 +46,6 @@ public class ChatGptVectorStore extends ClientBase {
                 .build();
 
         log.debug("ChatGPT Create Vector Store request body: {}", requestBody);
-        return httpClient.createRequestFromJson(uri.toString(), config.getGptToken(), requestBody);
+        return httpClient.createRequestFromJson(uri.toString(), config.getAIToken(), requestBody);
     }
 }

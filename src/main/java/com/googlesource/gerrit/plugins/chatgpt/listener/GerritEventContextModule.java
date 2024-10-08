@@ -11,9 +11,9 @@ import com.googlesource.gerrit.plugins.chatgpt.interfaces.mode.common.client.api
 import com.googlesource.gerrit.plugins.chatgpt.interfaces.mode.common.client.api.gerrit.IGerritClientPatchSet;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.gerrit.GerritChange;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.data.ChangeSetData;
-import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.client.api.chatgpt.ChatGptClientStateful;
+import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.client.api.chatgpt.AIChatClientStateful;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.client.api.gerrit.GerritClientPatchSetStateful;
-import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.api.chatgpt.ChatGptClientStateless;
+import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.api.chatai.AIChatClientStateless;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.api.gerrit.GerritClientPatchSetStateless;
 
 import static com.google.inject.Scopes.SINGLETON;
@@ -29,7 +29,7 @@ public class GerritEventContextModule extends FactoryModule {
 
     @Override
     protected void configure() {
-        bind(IChatGptClient.class).to(getChatGptMode());
+        bind(IChatGptClient.class).to(getChatAIMode());
         bind(IGerritClientPatchSet.class).to(getClientPatchSet());
 
         bind(Configuration.class).toInstance(config);
@@ -38,15 +38,15 @@ public class GerritEventContextModule extends FactoryModule {
         bind(PluginDataHandler.class).toProvider(PluginDataHandlerProvider.class).in(Singleton.class);
     }
 
-    private Class<? extends IChatGptClient> getChatGptMode() {
-        return switch (config.getGptMode()){
-            case stateful -> ChatGptClientStateful.class;
-            case stateless -> ChatGptClientStateless.class;
+    private Class<? extends IChatGptClient> getChatAIMode() {
+        return switch (config.getAIMode()){
+            case stateful -> AIChatClientStateful.class;
+            case stateless -> AIChatClientStateless.class;
         };
     }
 
     private Class<? extends IGerritClientPatchSet> getClientPatchSet() {
-        return switch (config.getGptMode()){
+        return switch (config.getAIMode()){
             case stateful -> GerritClientPatchSetStateful.class;
             case stateless -> GerritClientPatchSetStateless.class;
         };

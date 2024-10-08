@@ -8,10 +8,10 @@ import com.googlesource.gerrit.plugins.chatgpt.localization.Localizer;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.gerrit.GerritChange;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.gerrit.GerritClient;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.gerrit.GerritClientReview;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptResponseContent;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatResponseContent;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.data.ChangeSetData;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.review.ReviewBatch;
-import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.prompt.ChatGptPromptStateless;
+import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.prompt.AIChatPromptStateless;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -49,13 +49,13 @@ public class CodeReviewPluginIT {
     @Test
     public void sayHelloToGPT() throws Exception {
         ChangeSetData changeSetData = new ChangeSetData(1, config.getVotingMinScore(), config.getMaxReviewFileSize());
-        ChatGptPromptStateless chatGptPromptStateless = new ChatGptPromptStateless(config, true);
-        when(config.getGptDomain()).thenReturn(Configuration.OPENAI_DOMAIN);
-        when(config.getGptToken()).thenReturn("Your GPT token");
-        when(config.getGptModel()).thenReturn(Configuration.DEFAULT_GPT_MODEL);
-        when(chatGptPromptStateless.getGptSystemPrompt()).thenReturn(ChatGptPromptStateless.DEFAULT_GPT_SYSTEM_PROMPT);
+        AIChatPromptStateless AIChatPromptStateless = new AIChatPromptStateless(config, true);
+        when(config.getAIDomain()).thenReturn(Configuration.OPENAI_DOMAIN);
+        when(config.getAIToken()).thenReturn("Your GPT token");
+        when(config.getAIModel()).thenReturn(Configuration.DEFAULT_GPT_MODEL);
+        when(AIChatPromptStateless.getAISystemPrompt()).thenReturn(AIChatPromptStateless.DEFAULT_GPT_SYSTEM_PROMPT);
 
-        ChatGptResponseContent answer = chatGptClient.ask(changeSetData, new GerritChange(""), "hello");
+        AIChatResponseContent answer = chatGptClient.ask(changeSetData, new GerritChange(""), "hello");
         log.info("answer: {}", answer);
         assertNotNull(answer);
     }

@@ -38,10 +38,10 @@ import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.gerrit.Ger
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.gerrit.GerritClientFacade;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.gerrit.GerritClientReview;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.data.ChangeSetData;
-import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.client.api.chatgpt.ChatGptClientStateful;
+import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.client.api.chatgpt.AIChatClientStateful;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.client.api.gerrit.GerritClientPatchSetStateful;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.client.api.git.GitRepoFiles;
-import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.api.chatgpt.ChatGptClientStateless;
+import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.api.chatai.AIChatClientStateless;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.api.gerrit.GerritClientPatchSetStateless;
 import lombok.NonNull;
 import org.junit.Before;
@@ -71,7 +71,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class ChatGptReviewTestBase extends ChatGptTestBase {
+public class AIChatReviewTestBase extends AIChatTestBase {
     protected static final Path basePath = Paths.get("src/test/resources");
     protected static final int GERRIT_GPT_ACCOUNT_ID = 1000000;
     protected static final String GERRIT_GPT_USERNAME = "gpt";
@@ -80,7 +80,7 @@ public class ChatGptReviewTestBase extends ChatGptTestBase {
     protected static final String GERRIT_USER_ACCOUNT_EMAIL = "test@example.com";
     protected static final String GERRIT_USER_USERNAME = "test";
     protected static final String GERRIT_USER_GROUP = "Test";
-    protected static final String GPT_TOKEN = "tk-test";
+    protected static final String AI_TOKEN = "tk-test";
     protected static final String GPT_DOMAIN = "http://localhost:9527";
     protected static final boolean GPT_STREAM_OUTPUT = true;
     protected static final long TEST_TIMESTAMP = 1699270812;
@@ -142,7 +142,7 @@ public class ChatGptReviewTestBase extends ChatGptTestBase {
         };
 
         // Mock the Global Config values not provided by Default
-        when(globalConfig.getString("gptToken")).thenReturn(GPT_TOKEN);
+        when(globalConfig.getString("aiToken")).thenReturn(AI_TOKEN);
 
         // Mock the Global Config values to the Defaults passed as second arguments of the `get*` methods.
         when(globalConfig.getString(Mockito.anyString(), Mockito.anyString())).thenAnswer(returnDefaultArgument);
@@ -150,7 +150,7 @@ public class ChatGptReviewTestBase extends ChatGptTestBase {
         when(globalConfig.getBoolean(Mockito.anyString(), Mockito.anyBoolean())).thenAnswer(returnDefaultArgument);
 
         // Mock the Global Config values that differ from the ones provided by Default
-        when(globalConfig.getString(Mockito.eq("gptDomain"), Mockito.anyString()))
+        when(globalConfig.getString(Mockito.eq("aiDomain"), Mockito.anyString()))
                 .thenReturn(GPT_DOMAIN);
         when(globalConfig.getString("gerritUserName")).thenReturn(GERRIT_GPT_USERNAME);
 
@@ -388,14 +388,14 @@ public class ChatGptReviewTestBase extends ChatGptTestBase {
     }
 
     private IChatGptClient getChatGptClient() {
-        return switch (config.getGptMode()) {
-            case stateful -> new ChatGptClientStateful(config, gitRepoFiles, pluginDataHandlerProvider);
-            case stateless -> new ChatGptClientStateless(config);
+        return switch (config.getAIMode()) {
+            case stateful -> new AIChatClientStateful(config, gitRepoFiles, pluginDataHandlerProvider);
+            case stateless -> new AIChatClientStateless(config);
         };
     }
 
     private IGerritClientPatchSet getGerritClientPatchSet() {
-        return switch (config.getGptMode()) {
+        return switch (config.getAIMode()) {
             case stateful -> new GerritClientPatchSetStateful(config, accountCacheMock);
             case stateless -> new GerritClientPatchSetStateless(config, accountCacheMock);
         };

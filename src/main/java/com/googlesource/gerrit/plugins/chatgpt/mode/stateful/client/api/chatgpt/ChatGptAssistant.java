@@ -5,10 +5,10 @@ import com.googlesource.gerrit.plugins.chatgpt.data.PluginDataHandler;
 import com.googlesource.gerrit.plugins.chatgpt.data.PluginDataHandlerProvider;
 import com.googlesource.gerrit.plugins.chatgpt.interfaces.mode.stateful.client.prompt.IChatGptPromptStateful;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.ClientBase;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.chatgpt.ChatGptParameters;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.chatgpt.ChatGptTools;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.openai.AIChatParameters;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.openai.AIChatTools;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.gerrit.GerritChange;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptTool;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatTool;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.data.ChangeSetData;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.client.api.UriResourceLocatorStateful;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.client.api.git.GitRepoFiles;
@@ -117,11 +117,11 @@ public class ChatGptAssistant extends ClientBase {
     }
 
     private Request createRequest(String vectorStoreId) {
-        URI uri = URI.create(config.getGptDomain() + UriResourceLocatorStateful.assistantCreateUri());
+        URI uri = URI.create(config.getAIDomain() + UriResourceLocatorStateful.assistantCreateUri());
         log.debug("ChatGPT Create Assistant request URI: {}", uri);
-        ChatGptTool[] tools = new ChatGptTool[] {
-                new ChatGptTool("file_search"),
-                ChatGptTools.retrieveFormatRepliesTool()
+        AIChatTool[] tools = new AIChatTool[] {
+                new AIChatTool("file_search"),
+                AIChatTools.retrieveFormatRepliesTool()
         };
         ChatGptToolResources toolResources = new ChatGptToolResources(
                 new ChatGptToolResources.VectorStoreIds(
@@ -139,17 +139,17 @@ public class ChatGptAssistant extends ClientBase {
                 .build();
         log.debug("ChatGPT Create Assistant request body: {}", requestBody);
 
-        return httpClient.createRequestFromJson(uri.toString(), config.getGptToken(), requestBody);
+        return httpClient.createRequestFromJson(uri.toString(), config.getAIToken(), requestBody);
     }
 
     private void setupAssistantParameters() {
         IChatGptPromptStateful chatGptPromptStateful = getChatGptPromptStateful(config, changeSetData, change);
-        ChatGptParameters chatGptParameters = new ChatGptParameters(config, change.getIsCommentEvent());
+        AIChatParameters AIChatParameters = new AIChatParameters(config, change.getIsCommentEvent());
 
         description = chatGptPromptStateful.getDefaultGptAssistantDescription();
         instructions = chatGptPromptStateful.getDefaultGptAssistantInstructions();
-        model = config.getGptModel();
-        temperature = chatGptParameters.getGptTemperature();
+        model = config.getAIModel();
+        temperature = AIChatParameters.getGptTemperature();
     }
 
     private String calculateAssistantIdHashKey() {

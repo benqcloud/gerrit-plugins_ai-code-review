@@ -12,7 +12,7 @@ import java.util.List;
 import static com.googlesource.gerrit.plugins.chatgpt.utils.TextUtils.*;
 
 @Slf4j
-public class ChatGptPromptStateless extends ChatGptPrompt {
+public class AIChatPromptStateless extends ChatGptPrompt {
     public static String DEFAULT_GPT_SYSTEM_PROMPT_INPUT_DESCRIPTION;
     public static String DEFAULT_GPT_SYSTEM_PROMPT_INPUT_DESCRIPTION_REVIEW;
     public static String DEFAULT_GPT_REVIEW_PROMPT;
@@ -20,12 +20,12 @@ public class ChatGptPromptStateless extends ChatGptPrompt {
     public static String DEFAULT_GPT_REVIEW_PROMPT_MESSAGE_HISTORY;
     public static String DEFAULT_GPT_REVIEW_PROMPT_DIFF;
 
-    public ChatGptPromptStateless(Configuration config) {
+    public AIChatPromptStateless(Configuration config) {
         super(config);
         loadStatelessPrompts();
     }
 
-    public ChatGptPromptStateless(Configuration config, boolean isCommentEvent) {
+    public AIChatPromptStateless(Configuration config, boolean isCommentEvent) {
         super(config, isCommentEvent);
         loadStatelessPrompts();
     }
@@ -38,13 +38,13 @@ public class ChatGptPromptStateless extends ChatGptPrompt {
         )));
     }
 
-    public String getGptSystemPrompt() {
+    public String getAISystemPrompt() {
         List<String> prompt = new ArrayList<>(Arrays.asList(
-                config.getString(Configuration.KEY_GPT_SYSTEM_PROMPT, DEFAULT_GPT_SYSTEM_PROMPT) + DOT,
-                ChatGptPromptStateless.DEFAULT_GPT_SYSTEM_PROMPT_INPUT_DESCRIPTION
+                config.getString(Configuration.KEY_AI_SYSTEM_PROMPT, DEFAULT_GPT_SYSTEM_PROMPT) + DOT,
+                AIChatPromptStateless.DEFAULT_GPT_SYSTEM_PROMPT_INPUT_DESCRIPTION
         ));
         if (!isCommentEvent) {
-            prompt.add(ChatGptPromptStateless.DEFAULT_GPT_SYSTEM_PROMPT_INPUT_DESCRIPTION_REVIEW);
+            prompt.add(AIChatPromptStateless.DEFAULT_GPT_SYSTEM_PROMPT_INPUT_DESCRIPTION_REVIEW);
         }
         return joinWithSpace(prompt);
     }
@@ -64,12 +64,12 @@ public class ChatGptPromptStateless extends ChatGptPrompt {
             ));
         }
         else {
-            prompt.add(ChatGptPromptStateless.DEFAULT_GPT_REVIEW_PROMPT);
+            prompt.add(AIChatPromptStateless.DEFAULT_GPT_REVIEW_PROMPT);
             prompt.addAll(getReviewSteps());
-            prompt.add(ChatGptPromptStateless.DEFAULT_GPT_REVIEW_PROMPT_DIFF);
+            prompt.add(AIChatPromptStateless.DEFAULT_GPT_REVIEW_PROMPT_DIFF);
             prompt.add(patchSet);
             if (isValidRequestDataPrompt) {
-                prompt.add(ChatGptPromptStateless.DEFAULT_GPT_REVIEW_PROMPT_MESSAGE_HISTORY);
+                prompt.add(AIChatPromptStateless.DEFAULT_GPT_REVIEW_PROMPT_MESSAGE_HISTORY);
                 prompt.add(gptRequestDataPrompt);
             }
             if (!changeSetData.getDirectives().isEmpty()) {

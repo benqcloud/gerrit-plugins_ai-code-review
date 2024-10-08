@@ -11,8 +11,8 @@ import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.gerrit.Ger
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.gerrit.GerritClientReview;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.messages.DebugCodeBlocksReview;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.patch.comment.GerritCommentRange;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptReplyItem;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptResponseContent;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatReplyItem;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatResponseContent;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.gerrit.GerritCodeRange;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.gerrit.GerritComment;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.data.ChangeSetData;
@@ -66,14 +66,14 @@ public class PatchSetReviewer {
         commentProperties = gerritClient.getClientData(change).getCommentProperties();
         gerritCommentRange = new GerritCommentRange(gerritClient, change);
         String patchSet = gerritClient.getPatchSet(change);
-        if (patchSet.isEmpty() && config.getGptMode() == Settings.Modes.stateless) {
+        if (patchSet.isEmpty() && config.getAIMode() == Settings.Modes.stateless) {
             log.info("No file to review has been found in the PatchSet");
             return;
         }
         ChangeSetDataHandler.update(config, change, gerritClient, changeSetData, localizer);
 
         if (changeSetData.shouldRequestChatGptReview()) {
-            ChatGptResponseContent reviewReply = getReviewReply(change, patchSet);
+            AIChatResponseContent reviewReply = getReviewReply(change, patchSet);
             log.debug("ChatGPT response: {}", reviewReply);
 
             retrieveReviewBatches(reviewReply, change);
@@ -99,7 +99,7 @@ public class PatchSetReviewer {
         }
     }
 
-    private void setPatchSetReviewBatchMap(ReviewBatch batchMap, ChatGptReplyItem replyItem) {
+    private void setPatchSetReviewBatchMap(ReviewBatch batchMap, AIChatReplyItem replyItem) {
         Optional<GerritCodeRange> optGerritCommentRange = gerritCommentRange.getGerritCommentRange(replyItem);
         if (optGerritCommentRange.isPresent()) {
             GerritCodeRange gerritCodeRange = optGerritCommentRange.get();
@@ -109,12 +109,12 @@ public class PatchSetReviewer {
         }
     }
 
-    private void retrieveReviewBatches(ChatGptResponseContent reviewReply, GerritChange change) {
+    private void retrieveReviewBatches(AIChatResponseContent reviewReply, GerritChange change) {
         if (reviewReply.getMessageContent() != null && !reviewReply.getMessageContent().isEmpty()) {
             reviewBatches.add(new ReviewBatch(reviewReply.getMessageContent()));
             return;
         }
-        for (ChatGptReplyItem replyItem : reviewReply.getReplies()) {
+        for (AIChatReplyItem replyItem : reviewReply.getReplies()) {
             String reply = replyItem.getReply();
             Integer score = replyItem.getScore();
             boolean isNotNegative = isNotNegativeReply(score);
@@ -141,11 +141,11 @@ public class PatchSetReviewer {
         }
     }
 
-    private ChatGptResponseContent getReviewReply(GerritChange change, String patchSet) throws Exception {
+    private AIChatResponseContent getReviewReply(GerritChange change, String patchSet) throws Exception {
         List<String> patchLines = Arrays.asList(patchSet.split("\n"));
         if (patchLines.size() > config.getMaxReviewLines()) {
             log.warn("Patch set too large. Skipping review. changeId: {}", change.getFullChangeId());
-            return new ChatGptResponseContent(String.format(SPLIT_REVIEW_MSG, config.getMaxReviewLines()));
+            return new AIChatResponseContent(String.format(SPLIT_REVIEW_MSG, config.getMaxReviewLines()));
         }
 
         return chatGptClient.ask(changeSetData, change, patchSet);
@@ -168,7 +168,7 @@ public class PatchSetReviewer {
                 score >= config.getFilterCommentsBelowScore();
     }
 
-    private boolean isIrrelevantReply(ChatGptReplyItem replyItem) {
+    private boolean isIrrelevantReply(AIChatReplyItem replyItem) {
         return config.getFilterRelevantComments() &&
                 replyItem.getRelevance() != null &&
                 replyItem.getRelevance() < config.getFilterCommentsRelevanceThreshold();

@@ -1,4 +1,4 @@
-package com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.api.chatgpt;
+package com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.api.chatai;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.net.HttpHeaders;
@@ -6,17 +6,18 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.googlesource.gerrit.plugins.chatgpt.config.Configuration;
 import com.googlesource.gerrit.plugins.chatgpt.interfaces.mode.common.client.api.chatgpt.IChatGptClient;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.chatgpt.ChatGptClient;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.chatgpt.ChatGptParameters;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.chatgpt.ChatGptTools;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.openai.AIChatClient;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.openai.AIChatParameters;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.openai.AIChatTools;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.gerrit.GerritChange;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.http.HttpClientWithRetry;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.*;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.*;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.data.ChangeSetData;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.api.UriResourceLocatorStateless;
-import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.prompt.ChatGptPromptStateless;
+import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.prompt.AIChatPromptStateless;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.model.api.chatgpt.ChatGptCompletionRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.NameValuePair;
 import org.apache.http.entity.ContentType;
 
 import java.io.IOException;
@@ -29,18 +30,18 @@ import static com.googlesource.gerrit.plugins.chatgpt.utils.GsonUtils.getNoEscap
 
 @Slf4j
 @Singleton
-public class ChatGptClientStateless extends ChatGptClient implements IChatGptClient {
+public class AIChatClientStateless extends AIChatClient implements IChatGptClient {
     private static final int REVIEW_ATTEMPT_LIMIT = 3;
 
     private final HttpClientWithRetry httpClientWithRetry = new HttpClientWithRetry();
 
     @VisibleForTesting
     @Inject
-    public ChatGptClientStateless(Configuration config) {
+    public AIChatClientStateless(Configuration config) {
         super(config);
     }
 
-    public ChatGptResponseContent ask(ChangeSetData changeSetData, GerritChange change, String patchSet)
+    public AIChatResponseContent ask(ChangeSetData changeSetData, GerritChange change, String patchSet)
             throws Exception {
         isCommentEvent = change.getIsCommentEvent();
         String changeId = change.getFullChangeId();
@@ -57,7 +58,7 @@ public class ChatGptClientStateless extends ChatGptClient implements IChatGptCli
                 throw new IOException("ChatGPT response body is null");
             }
 
-            ChatGptResponseContent contentExtracted = extractContent(config, body);
+            AIChatResponseContent contentExtracted = extractContent(config, body);
             if (validateResponse(contentExtracted, changeId, attemptInd)) {
                 return contentExtracted;
             }
@@ -66,44 +67,49 @@ public class ChatGptClientStateless extends ChatGptClient implements IChatGptCli
     }
 
     protected HttpRequest createRequest(Configuration config, ChangeSetData changeSetData, String patchSet) {
-        URI uri = URI.create(config.getGptDomain() + UriResourceLocatorStateless.chatCompletionsUri());
-        log.debug("ChatGPT request URI: {}", uri);
+        URI uri = URI.create(config.getAIDomain() + UriResourceLocatorStateless.getChatResourceUri(config));
+        log.debug("AIChat request URI: {}", uri);
         requestBody = createRequestBody(config, changeSetData, patchSet);
-        log.debug("ChatGPT request body: {}", requestBody);
+        log.debug("AIChat request body: {}", requestBody);
 
-        return HttpRequest.newBuilder()
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + config.getGptToken())
+        HttpRequest.Builder builder = HttpRequest.newBuilder()
                 .header(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.toString())
                 .uri(uri)
-                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                .build();
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody));
+
+        // depending on the aiType, add appropriate authorization header ( if required ).
+        NameValuePair authHeader = config.getAuthorizationHeaderInfo();
+        if (authHeader != null) {
+            builder.header(authHeader.getName(), authHeader.getValue());
+        }
+        return builder.build();
     }
 
     private String createRequestBody(Configuration config, ChangeSetData changeSetData, String patchSet) {
-        ChatGptPromptStateless chatGptPromptStateless = new ChatGptPromptStateless(config, isCommentEvent);
-        ChatGptRequestMessage systemMessage = ChatGptRequestMessage.builder()
+        AIChatPromptStateless AIChatPromptStateless = new AIChatPromptStateless(config, isCommentEvent);
+        AIChatRequestMessage systemMessage = AIChatRequestMessage.builder()
                 .role("system")
-                .content(chatGptPromptStateless.getGptSystemPrompt())
+                .content(AIChatPromptStateless.getAISystemPrompt())
                 .build();
-        ChatGptRequestMessage userMessage = ChatGptRequestMessage.builder()
+        AIChatRequestMessage userMessage = AIChatRequestMessage.builder()
                 .role("user")
-                .content(chatGptPromptStateless.getGptUserPrompt(changeSetData, patchSet))
+                .content(AIChatPromptStateless.getGptUserPrompt(changeSetData, patchSet))
                 .build();
 
-        ChatGptParameters chatGptParameters = new ChatGptParameters(config, isCommentEvent);
-        ChatGptTool[] tools = new ChatGptTool[] {
-                ChatGptTools.retrieveFormatRepliesTool()
+        AIChatParameters AIChatParameters = new AIChatParameters(config, isCommentEvent);
+        AIChatTool[] tools = new AIChatTool[]{
+                AIChatTools.retrieveFormatRepliesTool()
         };
         ChatGptCompletionRequest chatGptCompletionRequest = ChatGptCompletionRequest.builder()
-                .model(config.getGptModel())
+                .model(config.getAIModel())
                 .messages(List.of(systemMessage, userMessage))
-                .temperature(chatGptParameters.getGptTemperature())
-                .stream(chatGptParameters.getStreamOutput())
+                .temperature(AIChatParameters.getGptTemperature())
+                .stream(AIChatParameters.getStreamOutput())
                 // Seed value is Utilized to prevent ChatGPT from mixing up separate API calls that occur in close
                 // temporal proximity.
-                .seed(chatGptParameters.getRandomSeed())
+                .seed(AIChatParameters.getRandomSeed())
                 .tools(tools)
-                .toolChoice(ChatGptTools.retrieveFormatRepliesToolChoice())
+                .toolChoice(AIChatTools.retrieveFormatRepliesToolChoice())
                 .build();
 
         return getNoEscapedGson().toJson(chatGptCompletionRequest);

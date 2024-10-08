@@ -1,4 +1,4 @@
-package com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt;
+package com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
@@ -6,12 +6,12 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ChatGptResponseStreamed {
+public class AIChatResponseStreamed {
     private List<Choice> choices;
 
     @Data
     public static class Choice {
-        protected ChatGptResponseMessage delta;
+        protected AIChatResponseMessage delta;
         protected int index;
         @SerializedName("finish_reason")
         protected String finishReason;
