@@ -6,9 +6,9 @@ import com.google.inject.Singleton;
 import com.googlesource.gerrit.plugins.chatgpt.config.Configuration;
 import com.googlesource.gerrit.plugins.chatgpt.data.PluginDataHandlerProvider;
 import com.googlesource.gerrit.plugins.chatgpt.interfaces.mode.common.client.api.chatgpt.IChatGptClient;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.chatgpt.ChatGptClient;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.openai.AIChatClient;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.gerrit.GerritChange;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptResponseContent;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatResponseContent;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.data.ChangeSetData;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.client.api.git.GitRepoFiles;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.model.api.chatgpt.ChatGptThreadMessageResponse;
@@ -20,7 +20,7 @@ import static com.googlesource.gerrit.plugins.chatgpt.utils.JsonTextUtils.unwrap
 
 @Slf4j
 @Singleton
-public class ChatGptClientStateful extends ChatGptClient implements IChatGptClient {
+public class AIChatClientStateful extends AIChatClient implements IChatGptClient {
     private static final String TYPE_MESSAGE_CREATION = "message_creation";
     private static final String TYPE_TOOL_CALLS = "tool_calls";
 
@@ -29,7 +29,7 @@ public class ChatGptClientStateful extends ChatGptClient implements IChatGptClie
 
     @VisibleForTesting
     @Inject
-    public ChatGptClientStateful(
+    public AIChatClientStateful(
             Configuration config,
             GitRepoFiles gitRepoFiles,
             PluginDataHandlerProvider pluginDataHandlerProvider
@@ -39,7 +39,7 @@ public class ChatGptClientStateful extends ChatGptClient implements IChatGptClie
         this.pluginDataHandlerProvider = pluginDataHandlerProvider;
     }
 
-    public ChatGptResponseContent ask(ChangeSetData changeSetData, GerritChange change, String patchSet) {
+    public AIChatResponseContent ask(ChangeSetData changeSetData, GerritChange change, String patchSet) {
         isCommentEvent = change.getIsCommentEvent();
         String changeId = change.getFullChangeId();
         log.info("Processing STATEFUL ChatGPT Request with changeId: {}, Patch Set: {}", changeId, patchSet);
@@ -70,13 +70,13 @@ public class ChatGptClientStateful extends ChatGptClient implements IChatGptClie
         requestBody = chatGptThreadMessage.getAddMessageRequestBody();
         log.debug("ChatGPT request body: {}", requestBody);
 
-        ChatGptResponseContent chatGptResponseContent = getResponseContentStateful(threadId, chatGptRun);
+        AIChatResponseContent AIChatResponseContent = getResponseContentStateful(threadId, chatGptRun);
         chatGptRun.cancelRun();
 
-        return chatGptResponseContent;
+        return AIChatResponseContent;
     }
 
-    private ChatGptResponseContent getResponseContentStateful(String threadId, ChatGptRun chatGptRun) {
+    private AIChatResponseContent getResponseContentStateful(String threadId, ChatGptRun chatGptRun) {
         return switch (chatGptRun.getFirstStepDetails().getType()) {
             case TYPE_MESSAGE_CREATION -> retrieveThreadMessage(threadId, chatGptRun);
             case TYPE_TOOL_CALLS -> getResponseContent(chatGptRun.getFirstStepToolCalls());
@@ -85,7 +85,7 @@ public class ChatGptClientStateful extends ChatGptClient implements IChatGptClie
         };
     }
 
-    private ChatGptResponseContent retrieveThreadMessage(String threadId, ChatGptRun chatGptRun) {
+    private AIChatResponseContent retrieveThreadMessage(String threadId, ChatGptRun chatGptRun) {
         ChatGptThreadMessage chatGptThreadMessage = new ChatGptThreadMessage(threadId, config);
         ChatGptThreadMessageResponse threadMessageResponse = chatGptThreadMessage.retrieveMessage(
                 chatGptRun.getFirstStepDetails().getMessageCreation().getMessageId()
@@ -97,10 +97,10 @@ public class ChatGptClientStateful extends ChatGptClient implements IChatGptClie
         if (isJsonString(responseText)) {
             return extractResponseContent(responseText);
         }
-        return new ChatGptResponseContent(responseText);
+        return new AIChatResponseContent(responseText);
     }
 
-    private ChatGptResponseContent extractResponseContent(String responseText) {
-        return getGson().fromJson(unwrapJsonCode(responseText), ChatGptResponseContent.class);
+    private AIChatResponseContent extractResponseContent(String responseText) {
+        return getGson().fromJson(unwrapJsonCode(responseText), AIChatResponseContent.class);
     }
 }

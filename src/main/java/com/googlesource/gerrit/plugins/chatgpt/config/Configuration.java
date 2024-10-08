@@ -1,5 +1,7 @@
 package com.googlesource.gerrit.plugins.chatgpt.config;
 
+import com.google.common.base.Strings;
+import com.google.common.net.HttpHeaders;
 import com.google.gerrit.entities.Account;
 import com.google.gerrit.extensions.api.GerritApi;
 import com.google.gerrit.server.config.PluginConfig;
@@ -8,11 +10,16 @@ import com.google.gerrit.server.util.OneOffRequestContext;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.regex.Pattern;
 
 import static com.googlesource.gerrit.plugins.chatgpt.settings.Settings.Modes;
+import static com.googlesource.gerrit.plugins.chatgpt.settings.Settings.AIType;
+
 
 @Slf4j
 public class Configuration {
@@ -86,18 +93,24 @@ public class Configuration {
     private static final boolean DEFAULT_FORCE_CREATE_ASSISTANT = false;
     private static final boolean DEFAULT_ENABLE_MESSAGE_DEBUGGING = false;
 
+    public static final String AUTH_HEADER_API_KEY = "api-key";
+
     // Config setting keys
-    public static final String KEY_GPT_SYSTEM_PROMPT = "gptSystemPrompt";
-    public static final String KEY_GPT_RELEVANCE_RULES = "gptRelevanceRules";
-    public static final String KEY_GPT_REVIEW_TEMPERATURE = "gptReviewTemperature";
-    public static final String KEY_GPT_COMMENT_TEMPERATURE = "gptCommentTemperature";
+    public static final String KEY_AI_SYSTEM_PROMPT = "aiSystemPrompt";
+    public static final String KEY_AI_RELEVANCE_RULES = "aiRelevanceRules";
+    public static final String KEY_AI_REVIEW_TEMPERATURE = "aiReviewTemperature";
+    public static final String KEY_AI_COMMENT_TEMPERATURE = "aiCommentTemperature";
     public static final String KEY_VOTING_MIN_SCORE = "votingMinScore";
     public static final String KEY_VOTING_MAX_SCORE = "votingMaxScore";
     public static final String KEY_GERRIT_USERNAME = "gerritUserName";
 
-    private static final String KEY_GPT_TOKEN = "gptToken";
-    private static final String KEY_GPT_DOMAIN = "gptDomain";
-    private static final String KEY_GPT_MODEL = "gptModel";
+    public static final String KEY_AI_TYPE = "aiType";
+    private static final String KEY_AI_TOKEN = "aiToken";
+    private static final String KEY_AI_DOMAIN = "aiDomain";
+    public static final String KEY_AI_CHAT_ENDPOINT = "aiChatEndpoint";
+    public static final String KEY_AI_AUTH_HEADER_NAME = "aiAuthHeaderName";
+
+    private static final String KEY_AI_MODEL = "gptModel";
     private static final String KEY_STREAM_OUTPUT = "gptStreamOutput";
     private static final String KEY_GPT_MODE = "gptMode";
     private static final String KEY_REVIEW_COMMIT_MESSAGES = "gptReviewCommitMessages";
@@ -153,20 +166,24 @@ public class Configuration {
       return context.openAs(userId);
     }
 
-    public String getGptToken() {
-        return getValidatedOrThrow(KEY_GPT_TOKEN);
+    public String getAIToken() {
+        return getValidatedOrThrow(KEY_AI_TOKEN);
     }
 
     public String getGerritUserName() {
         return getValidatedOrThrow(KEY_GERRIT_USERNAME);
     }
 
-    public String getGptDomain() {
-        return getString(KEY_GPT_DOMAIN, OPENAI_DOMAIN);
+    public String getAIDomain() {
+        String aiDomain = getString(KEY_AI_DOMAIN, OPENAI_DOMAIN);
+        // trim end slash, so putting endpoint urls together is easier.
+        return aiDomain.endsWith("/") ?
+                aiDomain.substring(0, aiDomain.length() - 1) : aiDomain;
     }
 
-    public String getGptModel() {
-        return getString(KEY_GPT_MODEL, DEFAULT_GPT_MODEL);
+    public String getAIModel() {
+        // default to the chatGPT model if nothing is specified.
+        return getString(KEY_AI_MODEL, DEFAULT_GPT_MODEL);
     }
 
     public boolean getGptReviewPatchSet() {
@@ -175,11 +192,25 @@ public class Configuration {
 
     public Modes getGptMode() {
         String mode = getString(KEY_GPT_MODE, DEFAULT_GPT_MODE);
-        try {
-            return Enum.valueOf(Modes.class, mode);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Illegal mode: " + mode, e);
-        }
+        return getValueAsEnum(Modes.class, mode);
+    }
+    public AIType getAIType(){
+        // return default type of CHATGPT if no value has been specified.
+        // Leaving the default behaviour of this plugin as it was historically.
+        String aiType = getString(KEY_AI_TYPE, "CHATGPT");
+        // for ease of use with enum, use toUpper, so we can always be case-sensitive on compares.
+        return getValueAsEnum( AIType.class, aiType.toUpperCase());
+    }
+
+    public String getChatEndpoint(){
+        // optional, and only used when combined with the "GENERIC" aiType, for testing
+        // of new or not yet supported ai frameworks.
+        return getString(KEY_AI_CHAT_ENDPOINT, "");
+    }
+    public String getAuthHeaderName(){
+        // optional, and only used when combined with the "GENERIC" aiType, for testing
+        // of new or not yet supported ai frameworks.
+        return getString(KEY_AI_AUTH_HEADER_NAME, "");
     }
 
     public boolean getGptReviewCommitMessages() {
@@ -298,6 +329,26 @@ public class Configuration {
         return getBoolean(KEY_IGNORE_OUTDATED_INLINE_COMMENTS, DEFAULT_IGNORE_OUTDATED_INLINE_COMMENTS);
     }
 
+
+    public NameValuePair getAuthorizationHeaderInfo() {
+        switch (getAIType()) {
+            case AZUREOPENAI:
+                return new BasicNameValuePair(AUTH_HEADER_API_KEY, getAIToken());
+            case OLLAMA:
+            case GENERIC:
+                // by default no auth header is required for ollama so return null for no auth.
+                // But if they wish to add some auth requirements, maybe for hosted setup,
+                // then allow the header to be generically specified, same as the GENERIC configuration.
+                return !Strings.isNullOrEmpty(getAuthHeaderName()) ?
+                        new BasicNameValuePair(getAuthHeaderName(), getAIToken()) : null;
+            case CHATGPT:
+            default:
+                // by default, or for chatGpt use bearer token, if someone is adding a new aiType, it can fall
+                // into this block - or they will need to extend the cases above.
+                return new BasicNameValuePair(HttpHeaders.AUTHORIZATION, "Bearer " + getAIToken());
+        }
+    }
+
     public String getString(String key, String defaultValue) {
         String value = projectConfig.getString(key);
         if (value != null) {
@@ -338,6 +389,15 @@ public class Configuration {
 
     private Double getDouble(String key, Double defaultValue) {
         return Double.parseDouble(getString(key, String.valueOf(defaultValue)));
+    }
+
+    @NotNull
+    private static <T extends Enum<T>> T getValueAsEnum(Class<T> enumClass, String value) {
+        try {
+            return Enum.valueOf(enumClass, value);
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException(String.format("Illegal value: %s for enum class: %s", value, enumClass), e);
+        }
     }
 
     private List<String> splitConfig(String value) {

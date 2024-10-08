@@ -4,8 +4,8 @@ import com.googlesource.gerrit.plugins.chatgpt.config.Configuration;
 import com.googlesource.gerrit.plugins.chatgpt.data.PluginDataHandlerProvider;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.ClientBase;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.gerrit.GerritChange;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptResponseMessage;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptToolCall;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatResponseMessage;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatToolCall;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.data.ChangeSetData;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.client.api.UriResourceLocatorStateful;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.client.api.git.GitRepoFiles;
@@ -95,11 +95,11 @@ public class ChatGptRun extends ClientBase {
         }
     }
 
-    public ChatGptResponseMessage getFirstStepDetails() {
+    public AIChatResponseMessage getFirstStepDetails() {
         return getFirstStep().getStepDetails();
     }
 
-    public List<ChatGptToolCall> getFirstStepToolCalls() {
+    public List<AIChatToolCall> getFirstStepToolCalls() {
         return getFirstStepDetails().getToolCalls();
     }
 
@@ -141,17 +141,17 @@ public class ChatGptRun extends ClientBase {
     }
 
     private Request runCreateRequest() {
-        URI uri = URI.create(config.getGptDomain() + UriResourceLocatorStateful.runsUri(threadId));
+        URI uri = URI.create(config.getAIDomain() + UriResourceLocatorStateful.runsUri(threadId));
         log.debug("ChatGPT Create Run request URI: {}", uri);
         ChatGptCreateRunRequest requestBody = ChatGptCreateRunRequest.builder()
                 .assistantId(assistantId)
                 .build();
 
-        return httpClient.createRequestFromJson(uri.toString(), config.getGptToken(), requestBody);
+        return httpClient.createRequestFromJson(uri.toString(), config.getAIToken(), requestBody);
     }
 
     private Request getPollRequest() {
-        URI uri = URI.create(config.getGptDomain()
+        URI uri = URI.create(config.getAIDomain()
                 + UriResourceLocatorStateful.runRetrieveUri(threadId, runResponse.getId()));
         log.debug("ChatGPT Poll Run request URI: {}", uri);
 
@@ -159,7 +159,7 @@ public class ChatGptRun extends ClientBase {
     }
 
     private Request getStepsRequest() {
-        URI uri = URI.create(config.getGptDomain()
+        URI uri = URI.create(config.getAIDomain()
                 + UriResourceLocatorStateful.runStepsUri(threadId, runResponse.getId()));
         log.debug("ChatGPT Run Steps request URI: {}", uri);
 
@@ -167,14 +167,14 @@ public class ChatGptRun extends ClientBase {
     }
 
     private Request getCancelRequest() {
-        URI uri = URI.create(config.getGptDomain()
+        URI uri = URI.create(config.getAIDomain()
                 + UriResourceLocatorStateful.runCancelUri(threadId, runResponse.getId()));
         log.debug("ChatGPT Run Cancel request URI: {}", uri);
 
-        return httpClient.createRequestFromJson(uri.toString(), config.getGptToken(), new Object());
+        return httpClient.createRequestFromJson(uri.toString(), config.getAIToken(), new Object());
     }
 
     private Request getRunPollRequest(URI uri) {
-        return httpClient.createRequestFromJson(uri.toString(), config.getGptToken(), null);
+        return httpClient.createRequestFromJson(uri.toString(), config.getAIToken(), null);
     }
 }

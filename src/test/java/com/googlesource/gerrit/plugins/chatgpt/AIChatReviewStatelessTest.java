@@ -12,7 +12,8 @@ import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.json.OutputFormat;
 import com.google.gson.Gson;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.api.UriResourceLocatorStateless;
-import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.prompt.ChatGptPromptStateless;
+import com.googlesource.gerrit.plugins.chatgpt.mode.stateless.client.prompt.AIChatPromptStateless;
+import com.googlesource.gerrit.plugins.chatgpt.settings.Settings;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.reflect.TypeLiteral;
@@ -28,6 +29,8 @@ import java.net.URI;
 import java.util.Arrays;
 import java.util.Map;
 
+import static com.googlesource.gerrit.plugins.chatgpt.config.Configuration.KEY_AI_CHAT_ENDPOINT;
+import static com.googlesource.gerrit.plugins.chatgpt.config.Configuration.KEY_AI_TYPE;
 import static com.googlesource.gerrit.plugins.chatgpt.listener.EventHandlerTask.SupportedEvents;
 import static com.googlesource.gerrit.plugins.chatgpt.utils.TextUtils.joinWithNewLine;
 import static java.net.HttpURLConnection.HTTP_OK;
@@ -36,7 +39,7 @@ import static org.mockito.Mockito.when;
 
 @Slf4j
 @RunWith(MockitoJUnitRunner.class)
-public class ChatGptReviewStatelessTest extends ChatGptReviewTestBase {
+public class AIChatReviewStatelessTest extends AIChatReviewTestBase {
     private ReviewInput expectedResponseStreamed;
     private String expectedSystemPromptReview;
     private String promptTagReview;
@@ -44,7 +47,7 @@ public class ChatGptReviewStatelessTest extends ChatGptReviewTestBase {
     private ReviewInput gerritPatchSetReview;
     private JsonArray prompts;
 
-    private ChatGptPromptStateless chatGptPromptStateless;
+    private AIChatPromptStateless AIChatPromptStateless;
 
     protected void initConfig() {
         super.initGlobalAndProjectConfig();
@@ -57,7 +60,7 @@ public class ChatGptReviewStatelessTest extends ChatGptReviewTestBase {
         super.initConfig();
 
         // Load the prompts
-        chatGptPromptStateless = new ChatGptPromptStateless(config);
+        AIChatPromptStateless = new AIChatPromptStateless(config);
     }
 
     protected void setupMockRequests() throws RestApiException {
@@ -81,12 +84,12 @@ public class ChatGptReviewStatelessTest extends ChatGptReviewTestBase {
         when(testFileMock.diff(0)).thenReturn(testFileDiff);
 
         // Mock the behavior of the askGpt request
-        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo(URI.create(config.getGptDomain()
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo(URI.create(config.getAIDomain()
                         + UriResourceLocatorStateless.chatCompletionsUri()).getPath()))
                 .willReturn(WireMock.aResponse()
                         .withStatus(HTTP_OK)
                         .withHeader(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.toString())
-                        .withBodyFile("chatGptResponseStreamed.txt")));
+                        .withBodyFile("aiChatResponseStreamed.txt")));
     }
 
     protected void initComparisonContent() {
@@ -94,10 +97,10 @@ public class ChatGptReviewStatelessTest extends ChatGptReviewTestBase {
 
         diffContent = readTestFile("reducePatchSet/patchSetDiffOutput.json");
         gerritPatchSetReview = readTestFileToClass("__files/stateless/gerritPatchSetReview.json", ReviewInput.class);
-        expectedResponseStreamed = readTestFileToClass("__files/stateless/chatGptExpectedResponseStreamed.json", ReviewInput.class);
-        promptTagReview = readTestFile("__files/stateless/chatGptPromptTagReview.json");
-        promptTagComments = readTestFile("__files/stateless/chatGptPromptTagRequests.json");
-        expectedSystemPromptReview = ChatGptPromptStateless.getDefaultGptReviewSystemPrompt();
+        expectedResponseStreamed = readTestFileToClass("__files/stateless/aiChatExpectedResponseStreamed.json", ReviewInput.class);
+        promptTagReview = readTestFile("__files/stateless/aiChatPromptTagReview.json");
+        promptTagComments = readTestFile("__files/stateless/aiChatPromptTagRequests.json");
+        expectedSystemPromptReview = AIChatPromptStateless.getDefaultGptReviewSystemPrompt();
     }
 
     protected ArgumentCaptor<ReviewInput> testRequestSent() throws RestApiException {
@@ -108,14 +111,14 @@ public class ChatGptReviewStatelessTest extends ChatGptReviewTestBase {
 
     private String getReviewUserPrompt() {
         return joinWithNewLine(Arrays.asList(
-                ChatGptPromptStateless.DEFAULT_GPT_REVIEW_PROMPT,
-                ChatGptPromptStateless.DEFAULT_GPT_REVIEW_PROMPT_REVIEW + " " +
-                        ChatGptPromptStateless.DEFAULT_GPT_PROMPT_FORCE_JSON_FORMAT + " " +
-                        chatGptPromptStateless.getPatchSetReviewPrompt(),
-                ChatGptPromptStateless.getReviewPromptCommitMessages(),
-                ChatGptPromptStateless.DEFAULT_GPT_REVIEW_PROMPT_DIFF,
+                AIChatPromptStateless.DEFAULT_GPT_REVIEW_PROMPT,
+                AIChatPromptStateless.DEFAULT_GPT_REVIEW_PROMPT_REVIEW + " " +
+                        AIChatPromptStateless.DEFAULT_GPT_PROMPT_FORCE_JSON_FORMAT + " " +
+                        AIChatPromptStateless.getPatchSetReviewPrompt(),
+                AIChatPromptStateless.getReviewPromptCommitMessages(),
+                AIChatPromptStateless.DEFAULT_GPT_REVIEW_PROMPT_DIFF,
                 diffContent,
-                ChatGptPromptStateless.DEFAULT_GPT_REVIEW_PROMPT_MESSAGE_HISTORY,
+                AIChatPromptStateless.DEFAULT_GPT_REVIEW_PROMPT_MESSAGE_HISTORY,
                 promptTagReview
         ));
     }
@@ -123,7 +126,7 @@ public class ChatGptReviewStatelessTest extends ChatGptReviewTestBase {
     @Test
     public void patchSetCreatedOrUpdatedStreamed() throws Exception {
         String reviewUserPrompt = getReviewUserPrompt();
-        chatGptPromptStateless.setCommentEvent(false);
+        AIChatPromptStateless.setCommentEvent(false);
 
         handleEventBasedOnType(SupportedEvents.PATCH_SET_CREATED);
 
@@ -145,13 +148,13 @@ public class ChatGptReviewStatelessTest extends ChatGptReviewTestBase {
                 .thenReturn(true);
 
         String reviewUserPrompt = getReviewUserPrompt();
-        chatGptPromptStateless.setCommentEvent(false);
-        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo(URI.create(config.getGptDomain()
+        AIChatPromptStateless.setCommentEvent(false);
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo(URI.create(config.getAIDomain()
                         + UriResourceLocatorStateless.chatCompletionsUri()).getPath()))
                 .willReturn(WireMock.aResponse()
                         .withStatus(HTTP_OK)
                         .withHeader(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.toString())
-                        .withBodyFile("chatGptResponseReview.json")));
+                        .withBodyFile("aiChatResponseReview.json")));
 
         handleEventBasedOnType(SupportedEvents.PATCH_SET_CREATED);
 
@@ -174,26 +177,84 @@ public class ChatGptReviewStatelessTest extends ChatGptReviewTestBase {
     @Test
     public void gptMentionedInComment() throws RestApiException {
         when(config.getGerritUserName()).thenReturn(GERRIT_GPT_USERNAME);
-        chatGptPromptStateless.setCommentEvent(true);
-        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo(URI.create(config.getGptDomain()
+        AIChatPromptStateless.setCommentEvent(true);
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo(URI.create(config.getAIDomain()
                         + UriResourceLocatorStateless.chatCompletionsUri()).getPath()))
                 .willReturn(WireMock.aResponse()
                         .withStatus(HTTP_OK)
                         .withHeader(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.toString())
-                        .withBodyFile("chatGptResponseRequestStateless.json")));
+                        .withBodyFile("aiChatResponseRequestStateless.json")));
 
         handleEventBasedOnType(SupportedEvents.COMMENT_ADDED);
         int commentPropertiesSize = gerritClient.getClientData(getGerritChange()).getCommentProperties().size();
 
         String commentUserPrompt = joinWithNewLine(Arrays.asList(
-                ChatGptPromptStateless.DEFAULT_GPT_REQUEST_PROMPT_DIFF,
+                AIChatPromptStateless.DEFAULT_GPT_REQUEST_PROMPT_DIFF,
                 diffContent,
-                ChatGptPromptStateless.DEFAULT_GPT_REQUEST_PROMPT_REQUESTS,
-                readTestFile("__files/stateless/chatGptExpectedRequestMessage.json"),
-                ChatGptPromptStateless.getCommentRequestPrompt(commentPropertiesSize)
+                AIChatPromptStateless.DEFAULT_GPT_REQUEST_PROMPT_REQUESTS,
+                readTestFile("__files/stateless/aiChatExpectedRequestMessage.json"),
+                AIChatPromptStateless.getCommentRequestPrompt(commentPropertiesSize)
         ));
         testRequestSent();
         String userPrompt = prompts.get(1).getAsJsonObject().get("content").getAsString();
         Assert.assertEquals(commentUserPrompt, userPrompt);
+    }
+
+    @Test
+    public void testAITypeValidOptions(){
+        when(globalConfig.getString(Mockito.eq("aiType"), Mockito.anyString()))
+                .thenReturn("CHATGPT");
+
+        // check default for aiType is chatGPT.
+        Assert.assertEquals(config.getAIType(), Settings.AIType.CHATGPT);
+
+        when(globalConfig.getString(Mockito.eq("aiType"), Mockito.anyString()))
+                .thenReturn("OLLAMA");
+
+        Assert.assertEquals(config.getAIType(), Settings.AIType.OLLAMA);
+    }
+
+    @Test
+    public void testAITypeControlsEndpoint(){
+        when(globalConfig.getString(Mockito.eq("aiType"), Mockito.anyString()))
+                .thenReturn("CHATGPT");
+
+        // check default for aiType is chatGPT.
+        Assert.assertEquals(config.getChatEndpoint(), "");
+        Assert.assertEquals(UriResourceLocatorStateless.chatCompletionsUri(),
+                UriResourceLocatorStateless.getChatResourceUri(config));
+
+        // swap it to ollama, check we still get the chatCompletionsUri, as its the openai
+        // compat endpoint we use.
+        when(globalConfig.getString(Mockito.eq("aiType"), Mockito.anyString()))
+                .thenReturn("OLLAMA");
+        Assert.assertEquals(UriResourceLocatorStateless.chatCompletionsUri(),
+                UriResourceLocatorStateless.getChatResourceUri(config));
+
+        // finally change to GENERIC, and check that we can specify any endpoint
+        when(globalConfig.getString(Mockito.eq(KEY_AI_TYPE), Mockito.anyString()))
+                .thenReturn("GENERIC");
+
+        final String expectedValueForEndpoint = "/someendpoint/someapi/chat";
+        when(globalConfig.getString(Mockito.eq(KEY_AI_CHAT_ENDPOINT), Mockito.anyString()))
+                .thenReturn(expectedValueForEndpoint);
+        Assert.assertEquals(expectedValueForEndpoint,
+                UriResourceLocatorStateless.getChatResourceUri(config));
+    }
+
+    @Test
+    public void testAITypeControlsAuthHeader(){
+        when(globalConfig.getString(Mockito.eq("aiType"), Mockito.anyString()))
+                .thenReturn("CHATGPT");
+
+        // check default for aiType is chatGPT.
+        Assert.assertEquals("Authorization", config.getAuthorizationHeaderInfo().getName());
+        Assert.assertEquals("Bearer " + config.getAIToken(), config.getAuthorizationHeaderInfo().getValue());
+
+        // swap it to ollama, check we still get the chatCompletionsUri, as its the openai
+        // compat endpoint we use.
+        when(globalConfig.getString(Mockito.eq("aiType"), Mockito.anyString()))
+                .thenReturn("OLLAMA");
+        Assert.assertNull("No expected value for auth header for ollama",  config.getAuthorizationHeaderInfo());
     }
 }

@@ -12,7 +12,7 @@ import java.nio.file.Path;
 
 import static org.mockito.Mockito.when;
 
-public class ChatGptTestBase {
+public class AIChatTestBase {
     protected static final Project.NameKey PROJECT_NAME = Project.NameKey.parse("myProject");
     protected static final Change.Key CHANGE_ID = Change.Key.parse("myChangeId");
     protected static final BranchNameKey BRANCH_NAME = BranchNameKey.create(PROJECT_NAME, "myBranchName");
@@ -34,6 +34,6 @@ public class ChatGptTestBase {
     }
 
     protected GerritChange getGerritChange() {
-        return new GerritChange(ChatGptTestBase.PROJECT_NAME, ChatGptTestBase.BRANCH_NAME, ChatGptTestBase.CHANGE_ID);
+        return new GerritChange(AIChatTestBase.PROJECT_NAME, AIChatTestBase.BRANCH_NAME, AIChatTestBase.CHANGE_ID);
     }
 }

@@ -1,7 +1,7 @@
 package com.googlesource.gerrit.plugins.chatgpt.mode.common.client.messages;
 
 import com.googlesource.gerrit.plugins.chatgpt.localization.Localizer;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptReplyItem;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatReplyItem;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class DebugCodeBlocksReview extends DebugCodeBlocks {
         super(localizer.getText("message.debugging.review.title"));
     }
 
-    public String getDebugCodeBlock(ChatGptReplyItem replyItem, boolean isHidden) {
+    public String getDebugCodeBlock(AIChatReplyItem replyItem, boolean isHidden) {
         return super.getDebugCodeBlock(List.of(
                 String.format(HIDDEN_REPLY, isHidden),
                 prettyStringifyObject(replyItem)

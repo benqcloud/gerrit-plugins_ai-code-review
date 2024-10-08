@@ -4,7 +4,7 @@ import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.gerrit.Ger
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.gerrit.GerritClient;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.patch.code.InlineCode;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.patch.diff.FileDiffProcessed;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptReplyItem;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatReplyItem;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.gerrit.GerritCodeRange;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,7 +19,7 @@ public class GerritCommentRange {
         fileDiffsProcessed = gerritClient.getFileDiffsProcessed(change);
     }
 
-    public Optional<GerritCodeRange> getGerritCommentRange(ChatGptReplyItem replyItem) {
+    public Optional<GerritCodeRange> getGerritCommentRange(AIChatReplyItem replyItem) {
         Optional<GerritCodeRange> gerritCommentRange = Optional.empty();
         String filename = replyItem.getFilename();
         if (filename == null || filename.equals("/COMMIT_MSG")) {

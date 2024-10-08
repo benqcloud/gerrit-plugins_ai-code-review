@@ -1,4 +1,4 @@
-package com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt;
+package com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai;
 
 import lombok.Data;
 import lombok.NonNull;
@@ -8,7 +8,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Data
-public class ChatGptTool {
+public class AIChatTool {
     @NonNull
     private String type;
     private Function function;

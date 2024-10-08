@@ -5,8 +5,8 @@ import com.googlesource.gerrit.plugins.chatgpt.interfaces.mode.common.client.pro
 import com.googlesource.gerrit.plugins.chatgpt.localization.Localizer;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.patch.code.InlineCode;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.patch.diff.FileDiffProcessed;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptMessageItem;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptRequestMessage;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatMessageItem;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatRequestMessage;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.gerrit.GerritComment;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.data.ChangeSetData;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.data.CommentData;
@@ -24,7 +24,7 @@ public abstract class ChatGptDataPromptBase implements IChatGptDataPrompt {
     protected final HashMap<String, FileDiffProcessed> fileDiffsProcessed;
     protected final CommentData commentData;
     @Getter
-    protected final List<ChatGptMessageItem> messageItems;
+    protected final List<AIChatMessageItem> messageItems;
 
     protected ChatGptHistory gptMessageHistory;
     @Getter
@@ -45,8 +45,8 @@ public abstract class ChatGptDataPromptBase implements IChatGptDataPrompt {
 
     public abstract void addMessageItem(int i);
 
-    protected ChatGptMessageItem getMessageItem(int i) {
-        ChatGptMessageItem messageItem = new ChatGptMessageItem();
+    protected AIChatMessageItem getMessageItem(int i) {
+        AIChatMessageItem messageItem = new AIChatMessageItem();
         GerritComment commentProperty = commentProperties.get(i);
         if (commentProperty.getLine() != null || commentProperty.getRange() != null) {
             String filename = commentProperty.getFilename();
@@ -63,7 +63,7 @@ public abstract class ChatGptDataPromptBase implements IChatGptDataPrompt {
         return messageItem;
     }
 
-    protected void setHistory(ChatGptMessageItem messageItem, List<ChatGptRequestMessage> messageHistory) {
+    protected void setHistory(AIChatMessageItem messageItem, List<AIChatRequestMessage> messageHistory) {
         if (!messageHistory.isEmpty()) {
             messageItem.setHistory(messageHistory);
         }

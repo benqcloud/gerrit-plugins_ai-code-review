@@ -4,7 +4,7 @@ import com.googlesource.gerrit.plugins.chatgpt.config.Configuration;
 import com.googlesource.gerrit.plugins.chatgpt.interfaces.mode.stateful.client.prompt.IChatGptPromptStateful;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.ClientBase;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.gerrit.GerritChange;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptRequestMessage;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatRequestMessage;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.data.ChangeSetData;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.client.api.UriResourceLocatorStateful;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.model.api.chatgpt.ChatGptResponse;
@@ -25,7 +25,7 @@ public class ChatGptThreadMessage extends ClientBase {
     private ChangeSetData changeSetData;
     private GerritChange change;
     private String patchSet;
-    private ChatGptRequestMessage addMessageRequestBody;
+    private AIChatRequestMessage addMessageRequestBody;
 
     public ChatGptThreadMessage(String threadId, Configuration config) {
         super(config);
@@ -69,23 +69,23 @@ public class ChatGptThreadMessage extends ClientBase {
     }
 
     private Request createRetrieveMessageRequest(String messageId) {
-        URI uri = URI.create(config.getGptDomain() +
+        URI uri = URI.create(config.getAIDomain() +
                 UriResourceLocatorStateful.threadMessageRetrieveUri(threadId, messageId));
         log.debug("ChatGPT Retrieve Thread Message request URI: {}", uri);
 
-        return httpClient.createRequestFromJson(uri.toString(), config.getGptToken(), null);
+        return httpClient.createRequestFromJson(uri.toString(), config.getAIToken(), null);
     }
 
     private Request addMessageRequest() {
-        URI uri = URI.create(config.getGptDomain() + UriResourceLocatorStateful.threadMessagesUri(threadId));
+        URI uri = URI.create(config.getAIDomain() + UriResourceLocatorStateful.threadMessagesUri(threadId));
         log.debug("ChatGPT Add Message request URI: {}", uri);
         IChatGptPromptStateful chatGptPromptStateful = getChatGptPromptStateful(config, changeSetData, change);
-        addMessageRequestBody = ChatGptRequestMessage.builder()
+        addMessageRequestBody = AIChatRequestMessage.builder()
                 .role("user")
                 .content(chatGptPromptStateful.getDefaultGptThreadReviewMessage(patchSet))
                 .build();
         log.debug("ChatGPT Add Message request body: {}", addMessageRequestBody);
 
-        return httpClient.createRequestFromJson(uri.toString(), config.getGptToken(), addMessageRequestBody);
+        return httpClient.createRequestFromJson(uri.toString(), config.getAIToken(), addMessageRequestBody);
     }
 }

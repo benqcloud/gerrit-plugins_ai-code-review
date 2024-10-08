@@ -1,6 +1,6 @@
 package com.googlesource.gerrit.plugins.chatgpt.mode.common.client.patch.code;
 
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptReplyItem;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatReplyItem;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.gerrit.GerritCodeRange;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.patch.code.CodeFinderDiff;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.patch.diff.DiffContent;
@@ -35,7 +35,7 @@ public class CodeFinder {
         PLACEHOLDER_REGEX = "(?:" + randomPlaceholder + ")+";
     }
 
-    public GerritCodeRange findCommentedCode(ChatGptReplyItem replyItem, int commentedLine) {
+    public GerritCodeRange findCommentedCode(AIChatReplyItem replyItem, int commentedLine) {
         this.commentedLine = commentedLine;
         updateCodePattern(replyItem);
         currentCodeRange = null;
@@ -58,7 +58,7 @@ public class CodeFinder {
         return closestCodeRange;
     }
 
-    private void updateCodePattern(ChatGptReplyItem replyItem) {
+    private void updateCodePattern(AIChatReplyItem replyItem) {
         String commentedCode = replyItem.getCodeSnippet()
                 .replaceAll(BEGINNING_DIFF_REGEX, "")
                 .replaceAll(ENDING_ELLIPSIS_REGEX, "")

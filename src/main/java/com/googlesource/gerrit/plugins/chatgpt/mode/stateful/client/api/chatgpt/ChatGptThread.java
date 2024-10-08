@@ -46,9 +46,9 @@ public class ChatGptThread {
     }
 
     private Request createThreadRequest() {
-        URI uri = URI.create(config.getGptDomain() + UriResourceLocatorStateful.threadsUri());
+        URI uri = URI.create(config.getAIDomain() + UriResourceLocatorStateful.threadsUri());
         log.debug("ChatGPT Create Thread request URI: {}", uri);
 
-        return httpClient.createRequestFromJson(uri.toString(), config.getGptToken(), new Object());
+        return httpClient.createRequestFromJson(uri.toString(), config.getAIToken(), new Object());
     }
 }

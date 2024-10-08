@@ -1,16 +1,14 @@
-package com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt;
+package com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai;
 
 import lombok.Data;
 
 @Data
-public class ChatGptToolCall {
-    private String id;
+public class AIChatToolChoice {
     private String type;
     private Function function;
 
     @Data
     public static class Function {
         private String name;
-        private String arguments;
     }
 }

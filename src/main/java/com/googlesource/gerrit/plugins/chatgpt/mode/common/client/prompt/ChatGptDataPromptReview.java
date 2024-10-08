@@ -3,8 +3,8 @@ package com.googlesource.gerrit.plugins.chatgpt.mode.common.client.prompt;
 import com.googlesource.gerrit.plugins.chatgpt.config.Configuration;
 import com.googlesource.gerrit.plugins.chatgpt.interfaces.mode.common.client.prompt.IChatGptDataPrompt;
 import com.googlesource.gerrit.plugins.chatgpt.localization.Localizer;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptMessageItem;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptRequestMessage;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatMessageItem;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatRequestMessage;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.data.ChangeSetData;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.data.GerritClientData;
 import lombok.extern.slf4j.Slf4j;
@@ -25,15 +25,15 @@ public class ChatGptDataPromptReview extends ChatGptDataPromptBase implements IC
     }
 
     public void addMessageItem(int i) {
-        ChatGptMessageItem messageItem = getMessageItem(i);
+        AIChatMessageItem messageItem = getMessageItem(i);
         if (messageItem.getHistory() != null) {
             messageItems.add(messageItem);
         }
     }
 
-    protected ChatGptMessageItem getMessageItem(int i) {
-        ChatGptMessageItem messageItem = super.getMessageItem(i);
-        List<ChatGptRequestMessage> messageHistory = gptMessageHistory.retrieveHistory(commentProperties.get(i),
+    protected AIChatMessageItem getMessageItem(int i) {
+        AIChatMessageItem messageItem = super.getMessageItem(i);
+        List<AIChatRequestMessage> messageHistory = gptMessageHistory.retrieveHistory(commentProperties.get(i),
                 true);
         setHistory(messageItem, messageHistory);
 

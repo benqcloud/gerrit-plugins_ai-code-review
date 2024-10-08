@@ -2,8 +2,8 @@ package com.googlesource.gerrit.plugins.chatgpt.mode.common.client.prompt;
 
 import com.googlesource.gerrit.plugins.chatgpt.config.Configuration;
 import com.googlesource.gerrit.plugins.chatgpt.localization.Localizer;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptMessageItem;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptRequestMessage;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatMessageItem;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatRequestMessage;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.data.ChangeSetData;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.data.GerritClientData;
 import lombok.extern.slf4j.Slf4j;
@@ -14,8 +14,8 @@ import static com.googlesource.gerrit.plugins.chatgpt.settings.Settings.CHAT_GPT
 
 @Slf4j
 public class ChatGptDataPromptRequests extends ChatGptDataPromptBase {
-    protected ChatGptMessageItem messageItem;
-    protected List<ChatGptRequestMessage> messageHistory;
+    protected AIChatMessageItem messageItem;
+    protected List<AIChatRequestMessage> messageHistory;
 
     public ChatGptDataPromptRequests(
             Configuration config,
@@ -28,21 +28,21 @@ public class ChatGptDataPromptRequests extends ChatGptDataPromptBase {
     }
 
     public void addMessageItem(int i) {
-        ChatGptMessageItem messageItem = getMessageItem(i);
+        AIChatMessageItem messageItem = getMessageItem(i);
         messageItem.setId(i);
         messageItems.add(messageItem);
     }
 
-    protected ChatGptMessageItem getMessageItem(int i) {
+    protected AIChatMessageItem getMessageItem(int i) {
         messageItem = super.getMessageItem(i);
         messageHistory = gptMessageHistory.retrieveHistory(commentProperties.get(i));
-        ChatGptRequestMessage request = extractLastUserMessageFromHistory();
+        AIChatRequestMessage request = extractLastUserMessageFromHistory();
         messageItem.setRequest(request.getContent());
 
         return messageItem;
     }
 
-    private ChatGptRequestMessage extractLastUserMessageFromHistory() {
+    private AIChatRequestMessage extractLastUserMessageFromHistory() {
         for (int i = messageHistory.size() - 1; i >= 0; i--) {
             if (CHAT_GPT_ROLE_USER.equals(messageHistory.get(i).getRole())) {
                 return messageHistory.remove(i);

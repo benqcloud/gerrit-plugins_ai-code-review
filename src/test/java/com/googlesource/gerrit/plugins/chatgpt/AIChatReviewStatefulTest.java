@@ -10,7 +10,7 @@ import com.google.gerrit.extensions.restapi.RestApiException;
 import com.googlesource.gerrit.plugins.chatgpt.data.PluginDataHandler;
 import com.googlesource.gerrit.plugins.chatgpt.data.PluginDataHandlerProvider;
 import com.googlesource.gerrit.plugins.chatgpt.interfaces.mode.stateful.client.prompt.IChatGptPromptStateful;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptResponseContent;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatResponseContent;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.client.api.UriResourceLocatorStateful;
 import com.googlesource.gerrit.plugins.chatgpt.mode.stateful.model.api.chatgpt.ChatGptListResponse;
 import com.googlesource.gerrit.plugins.chatgpt.settings.Settings.Modes;
@@ -41,7 +41,7 @@ import static org.mockito.Mockito.*;
 
 @Slf4j
 @RunWith(MockitoJUnitRunner.class)
-public class ChatGptReviewStatefulTest extends ChatGptReviewTestBase {
+public class AIChatReviewStatefulTest extends AIChatReviewTestBase {
     private static final String CHAT_GPT_FILE_ID = "file-TEST_FILE_ID";
     private static final String CHAT_GPT_VECTOR_ID = "file-TEST_VECTOR_ID";
     private static final String CHAT_GPT_ASSISTANT_ID = "asst_TEST_ASSISTANT_ID";
@@ -54,7 +54,7 @@ public class ChatGptReviewStatefulTest extends ChatGptReviewTestBase {
     private String requestContent;
     private PluginDataHandler projectHandler;
 
-    public ChatGptReviewStatefulTest() {
+    public AIChatReviewStatefulTest() {
         MockitoAnnotations.openMocks(this);
     }
 
@@ -89,7 +89,7 @@ public class ChatGptReviewStatefulTest extends ChatGptReviewTestBase {
         when(gitRepoFiles.getGitRepoFiles(any(), any())).thenReturn(repoJson);
 
         // Mock the behavior of the ChatGPT create-file request
-        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo(URI.create(config.getGptDomain()
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo(URI.create(config.getAIDomain()
                         + UriResourceLocatorStateful.filesCreateUri()).getPath()))
                 .willReturn(WireMock.aResponse()
                         .withStatus(HTTP_OK)
@@ -97,7 +97,7 @@ public class ChatGptReviewStatefulTest extends ChatGptReviewTestBase {
                         .withBody("{\"id\": " + CHAT_GPT_FILE_ID + "}")));
 
         // Mock the behavior of the ChatGPT create-vector-store request
-        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo(URI.create(config.getGptDomain()
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo(URI.create(config.getAIDomain()
                         + UriResourceLocatorStateful.vectorStoreCreateUri()).getPath()))
                 .willReturn(WireMock.aResponse()
                         .withStatus(HTTP_OK)
@@ -105,7 +105,7 @@ public class ChatGptReviewStatefulTest extends ChatGptReviewTestBase {
                         .withBody("{\"id\": " + CHAT_GPT_VECTOR_ID + "}")));
 
         // Mock the behavior of the ChatGPT create-assistant request
-        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo(URI.create(config.getGptDomain()
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo(URI.create(config.getAIDomain()
                         + UriResourceLocatorStateful.assistantCreateUri()).getPath()))
                 .willReturn(WireMock.aResponse()
                         .withStatus(HTTP_OK)
@@ -113,7 +113,7 @@ public class ChatGptReviewStatefulTest extends ChatGptReviewTestBase {
                         .withBody("{\"id\": " + CHAT_GPT_ASSISTANT_ID + "}")));
 
         // Mock the behavior of the ChatGPT create-thread request
-        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo(URI.create(config.getGptDomain()
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo(URI.create(config.getAIDomain()
                         + UriResourceLocatorStateful.threadsUri()).getPath()))
                 .willReturn(WireMock.aResponse()
                         .withStatus(HTTP_OK)
@@ -121,7 +121,7 @@ public class ChatGptReviewStatefulTest extends ChatGptReviewTestBase {
                         .withBody("{\"id\": " + CHAT_GPT_THREAD_ID + "}")));
 
         // Mock the behavior of the ChatGPT add-message-to-thread request
-        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo(URI.create(config.getGptDomain()
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo(URI.create(config.getAIDomain()
                         + UriResourceLocatorStateful.threadMessagesUri(CHAT_GPT_THREAD_ID)).getPath()))
                 .willReturn(WireMock.aResponse()
                         .withStatus(HTTP_OK)
@@ -129,7 +129,7 @@ public class ChatGptReviewStatefulTest extends ChatGptReviewTestBase {
                         .withBody("{\"id\": " + CHAT_GPT_MESSAGE_ID + "}")));
 
         // Mock the behavior of the ChatGPT create-run request
-        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo(URI.create(config.getGptDomain()
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo(URI.create(config.getAIDomain()
                         + UriResourceLocatorStateful.runsUri(CHAT_GPT_THREAD_ID)).getPath()))
                 .willReturn(WireMock.aResponse()
                         .withStatus(HTTP_OK)
@@ -137,7 +137,7 @@ public class ChatGptReviewStatefulTest extends ChatGptReviewTestBase {
                         .withBody("{\"id\": " + CHAT_GPT_RUN_ID + "}")));
 
         // Mock the behavior of the ChatGPT retrieve-run request
-        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo(URI.create(config.getGptDomain()
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo(URI.create(config.getAIDomain()
                         + UriResourceLocatorStateful.runRetrieveUri(CHAT_GPT_THREAD_ID, CHAT_GPT_RUN_ID)).getPath()))
                 .willReturn(WireMock.aResponse()
                         .withStatus(HTTP_OK)
@@ -163,7 +163,7 @@ public class ChatGptReviewStatefulTest extends ChatGptReviewTestBase {
     protected void initComparisonContent() {
         super.initComparisonContent();
 
-        promptTagComments = readTestFile("__files/stateful/chatGptPromptTagRequests.json");
+        promptTagComments = readTestFile("__files/stateful/aiChatPromptTagRequests.json");
     }
 
     protected ArgumentCaptor<ReviewInput> testRequestSent() throws RestApiException {
@@ -176,7 +176,7 @@ public class ChatGptReviewStatefulTest extends ChatGptReviewTestBase {
         ChatGptListResponse responseContent = getGson().fromJson(readTestFile(responseFile), ChatGptListResponse.class);
         String reviewJsonResponse = responseContent.getData().get(0).getStepDetails().getToolCalls().get(tollCallId)
                 .getFunction().getArguments();
-        return getGson().fromJson(reviewJsonResponse, ChatGptResponseContent.class).getReplies().get(0).getReply();
+        return getGson().fromJson(reviewJsonResponse, AIChatResponseContent.class).getReplies().get(0).getReply();
     }
 
     private String getCapturedMessage(ArgumentCaptor<ReviewInput> captor, String filename) {
@@ -185,7 +185,7 @@ public class ChatGptReviewStatefulTest extends ChatGptReviewTestBase {
 
     private void mockRetrieveRunSteps(String bodyFile) {
         // Mock the behavior of the ChatGPT retrieve-run-steps request
-        WireMock.stubFor(WireMock.get(WireMock.urlEqualTo(URI.create(config.getGptDomain()
+        WireMock.stubFor(WireMock.get(WireMock.urlEqualTo(URI.create(config.getAIDomain()
                         + UriResourceLocatorStateful.runStepsUri(CHAT_GPT_THREAD_ID, CHAT_GPT_RUN_ID)).getPath()))
                 .willReturn(WireMock.aResponse()
                         .withStatus(HTTP_OK)
@@ -255,7 +255,7 @@ public class ChatGptReviewStatefulTest extends ChatGptReviewTestBase {
 
         chatGptPromptStateful.setCommentEvent(true);
         mockRetrieveRunSteps("chatGptResponseRequestMessageStateful.json");
-        WireMock.stubFor(WireMock.get(WireMock.urlEqualTo(URI.create(config.getGptDomain()
+        WireMock.stubFor(WireMock.get(WireMock.urlEqualTo(URI.create(config.getAIDomain()
                         + UriResourceLocatorStateful.threadMessageRetrieveUri(CHAT_GPT_THREAD_ID, CHAT_GPT_MESSAGE_ID)).getPath()))
                 .willReturn(WireMock.aResponse()
                         .withStatus(HTTP_OK)
@@ -275,7 +275,7 @@ public class ChatGptReviewStatefulTest extends ChatGptReviewTestBase {
 
         chatGptPromptStateful.setCommentEvent(true);
         mockRetrieveRunSteps("chatGptResponseRequestMessageStateful.json");
-        WireMock.stubFor(WireMock.get(WireMock.urlEqualTo(URI.create(config.getGptDomain()
+        WireMock.stubFor(WireMock.get(WireMock.urlEqualTo(URI.create(config.getAIDomain()
                         + UriResourceLocatorStateful.threadMessageRetrieveUri(CHAT_GPT_THREAD_ID, CHAT_GPT_MESSAGE_ID)).getPath()))
                 .willReturn(WireMock.aResponse()
                         .withStatus(HTTP_OK)
