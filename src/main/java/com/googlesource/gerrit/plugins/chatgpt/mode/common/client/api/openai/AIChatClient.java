@@ -1,8 +1,8 @@
-package com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.chatgpt;
+package com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.openai;
 
 import com.googlesource.gerrit.plugins.chatgpt.config.Configuration;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.ClientBase;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.*;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.*;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -15,16 +15,16 @@ import java.util.Optional;
 import static com.googlesource.gerrit.plugins.chatgpt.utils.GsonUtils.getGson;
 
 @Slf4j
-abstract public class ChatGptClient extends ClientBase {
+abstract public class AIChatClient extends ClientBase {
     protected boolean isCommentEvent = false;
     @Getter
     protected String requestBody;
 
-    public ChatGptClient(Configuration config) {
+    public AIChatClient(Configuration config) {
         super(config);
     }
 
-    protected ChatGptResponseContent extractContent(Configuration config, String body) throws Exception {
+    protected AIChatResponseContent extractContent(Configuration config, String body) throws Exception {
         if (config.getGptStreamOutput() && !isCommentEvent) {
             StringBuilder finalContent = new StringBuilder();
             try (BufferedReader reader = new BufferedReader(new StringReader(body))) {
@@ -36,14 +36,14 @@ abstract public class ChatGptClient extends ClientBase {
             return convertResponseContentFromJson(finalContent.toString());
         }
         else {
-            ChatGptResponseUnstreamed chatGptResponseUnstreamed =
-                    getGson().fromJson(body, ChatGptResponseUnstreamed.class);
-            return getResponseContent(chatGptResponseUnstreamed.getChoices().get(0).getMessage().getToolCalls());
+            AIChatResponseUnstreamed AIChatResponseUnstreamed =
+                    getGson().fromJson(body, AIChatResponseUnstreamed.class);
+            return getResponseContent(AIChatResponseUnstreamed.getChoices().get(0).getMessage().getToolCalls());
         }
     }
 
-    protected boolean validateResponse(ChatGptResponseContent chatGptResponseContent, String changeId, int attemptInd) {
-        String returnedChangeId = chatGptResponseContent.getChangeId();
+    protected boolean validateResponse(AIChatResponseContent AIChatResponseContent, String changeId, int attemptInd) {
+        String returnedChangeId = AIChatResponseContent.getChangeId();
         // A response is considered valid if either no changeId is returned or the changeId returned matches the one
         // provided in the request
         boolean isValidated = returnedChangeId == null || changeId.equals(returnedChangeId);
@@ -54,7 +54,7 @@ abstract public class ChatGptClient extends ClientBase {
         return isValidated;
     }
 
-    protected ChatGptResponseContent getResponseContent(List<ChatGptToolCall> toolCalls) {
+    protected AIChatResponseContent getResponseContent(List<AIChatToolCall> toolCalls) {
         if (toolCalls.size() > 1) {
             return mergeToolCalls(toolCalls);
         } else {
@@ -68,9 +68,9 @@ abstract public class ChatGptClient extends ClientBase {
         if (!line.startsWith(dataPrefix)) {
             return Optional.empty();
         }
-        ChatGptResponseStreamed chatGptResponseStreamed =
-                getGson().fromJson(line.substring("data: ".length()), ChatGptResponseStreamed.class);
-        ChatGptResponseMessage delta = chatGptResponseStreamed.getChoices().get(0).getDelta();
+        AIChatResponseStreamed AIChatResponseStreamed =
+                getGson().fromJson(line.substring("data: ".length()), AIChatResponseStreamed.class);
+        AIChatResponseMessage delta = AIChatResponseStreamed.getChoices().get(0).getDelta();
         if (delta == null || delta.getToolCalls() == null) {
             return Optional.empty();
         }
@@ -78,20 +78,20 @@ abstract public class ChatGptClient extends ClientBase {
         return Optional.ofNullable(content);
     }
 
-    private ChatGptResponseContent convertResponseContentFromJson(String content) {
-        return getGson().fromJson(content, ChatGptResponseContent.class);
+    private AIChatResponseContent convertResponseContentFromJson(String content) {
+        return getGson().fromJson(content, AIChatResponseContent.class);
     }
 
-    private String getArgumentAsString(List<ChatGptToolCall> toolCalls, int ind) {
+    private String getArgumentAsString(List<AIChatToolCall> toolCalls, int ind) {
         return toolCalls.get(ind).getFunction().getArguments();
     }
 
-    private ChatGptResponseContent getArgumentAsResponse(List<ChatGptToolCall> toolCalls, int ind) {
+    private AIChatResponseContent getArgumentAsResponse(List<AIChatToolCall> toolCalls, int ind) {
         return convertResponseContentFromJson(getArgumentAsString(toolCalls, ind));
     }
 
-    private ChatGptResponseContent mergeToolCalls(List<ChatGptToolCall> toolCalls) {
-        ChatGptResponseContent responseContent = getArgumentAsResponse(toolCalls, 0);
+    private AIChatResponseContent mergeToolCalls(List<AIChatToolCall> toolCalls) {
+        AIChatResponseContent responseContent = getArgumentAsResponse(toolCalls, 0);
         for (int ind = 1; ind < toolCalls.size(); ind++) {
             responseContent.getReplies().addAll(
                     getArgumentAsResponse(toolCalls, ind).getReplies()

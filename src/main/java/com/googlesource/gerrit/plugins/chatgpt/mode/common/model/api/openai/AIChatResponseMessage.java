@@ -1,4 +1,4 @@
-package com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt;
+package com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
@@ -6,11 +6,11 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ChatGptResponseMessage {
+public class AIChatResponseMessage {
     private String role;
     private String type;
     @SerializedName("tool_calls")
-    private List<ChatGptToolCall> toolCalls;
+    private List<AIChatToolCall> toolCalls;
     @SerializedName("message_creation")
     private MessageCreation messageCreation;
 

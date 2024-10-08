@@ -1,11 +1,11 @@
-package com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt;
+package com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ChatGptReplyItem extends ChatGptDialogueItem {
+public class AIChatReplyItem extends AIChatDialogueItem {
     private String reply;
     private Integer score;
     private Double relevance;

@@ -23,4 +23,14 @@ public class Settings {
         stateless,
         stateful
     }
+
+    public enum AIType {
+        CHATGPT,
+        OLLAMA,
+        AZUREOPENAI,
+
+        // used for testing new endpoints and ai services not yet in the supported list, but you can specify the
+        // endpoint, the authorization header information, and the prompt to quickly prove out a new aiType.
+        GENERIC;
+    }
 }

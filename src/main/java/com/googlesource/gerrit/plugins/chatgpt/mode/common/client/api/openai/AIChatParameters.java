@@ -1,25 +1,25 @@
-package com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.chatgpt;
+package com.googlesource.gerrit.plugins.chatgpt.mode.common.client.api.openai;
 
 import com.googlesource.gerrit.plugins.chatgpt.config.Configuration;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.ClientBase;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class ChatGptParameters extends ClientBase {
+public class AIChatParameters extends ClientBase {
     private static boolean isCommentEvent;
 
-    public ChatGptParameters(Configuration config, boolean isCommentEvent) {
+    public AIChatParameters(Configuration config, boolean isCommentEvent) {
         super(config);
-        ChatGptParameters.isCommentEvent = isCommentEvent;
+        AIChatParameters.isCommentEvent = isCommentEvent;
     }
 
     public double getGptTemperature() {
         if (isCommentEvent) {
-            return retrieveTemperature(Configuration.KEY_GPT_COMMENT_TEMPERATURE,
+            return retrieveTemperature(Configuration.KEY_AI_COMMENT_TEMPERATURE,
                     Configuration.DEFAULT_GPT_COMMENT_TEMPERATURE);
         }
        else {
-            return retrieveTemperature(Configuration.KEY_GPT_REVIEW_TEMPERATURE,
+            return retrieveTemperature(Configuration.KEY_AI_REVIEW_TEMPERATURE,
                     Configuration.DEFAULT_GPT_REVIEW_TEMPERATURE);
         }
     }

@@ -1,7 +1,7 @@
 package com.googlesource.gerrit.plugins.chatgpt.mode.common.client.patch.code;
 
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.client.patch.diff.FileDiffProcessed;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptReplyItem;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatReplyItem;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.gerrit.GerritCodeRange;
 import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.gerrit.GerritComment;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +37,7 @@ public class InlineCode {
         }
     }
 
-    public Optional<GerritCodeRange> findCommentRange(ChatGptReplyItem replyItem) {
+    public Optional<GerritCodeRange> findCommentRange(AIChatReplyItem replyItem) {
         int commentedLine;
         try {
             commentedLine = replyItem.getLineNumber();

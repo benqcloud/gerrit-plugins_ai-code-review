@@ -1,9 +1,9 @@
-package com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt;
+package com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai;
 
 import lombok.Data;
 
 @Data
-public abstract class ChatGptDialogueItem {
+public abstract class AIChatDialogueItem {
     protected Integer id;
     protected String filename;
     protected Integer lineNumber;

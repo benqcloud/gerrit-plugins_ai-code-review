@@ -1,7 +1,7 @@
 package com.googlesource.gerrit.plugins.chatgpt.mode.stateful.model.api.chatgpt;
 
 import com.google.gson.annotations.SerializedName;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptTool;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatTool;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,7 +13,7 @@ public class ChatGptCreateAssistantRequestBody {
     private String instructions;
     private String model;
     private Double temperature;
-    private ChatGptTool[] tools;
+    private AIChatTool[] tools;
     @SerializedName("tool_resources")
     private ChatGptToolResources toolResources;
 }

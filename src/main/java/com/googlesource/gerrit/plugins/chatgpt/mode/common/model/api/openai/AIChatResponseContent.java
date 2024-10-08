@@ -1,4 +1,4 @@
-package com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt;
+package com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai;
 
 import lombok.Data;
 import lombok.NonNull;
@@ -8,8 +8,8 @@ import java.util.List;
 
 @Data
 @RequiredArgsConstructor
-public class ChatGptResponseContent {
-    private List<ChatGptReplyItem> replies;
+public class AIChatResponseContent {
+    private List<AIChatReplyItem> replies;
     private String changeId;
     @NonNull
     private String messageContent;

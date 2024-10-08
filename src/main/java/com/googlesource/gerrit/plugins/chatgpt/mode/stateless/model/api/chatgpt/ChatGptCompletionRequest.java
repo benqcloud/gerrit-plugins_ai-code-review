@@ -1,9 +1,9 @@
 package com.googlesource.gerrit.plugins.chatgpt.mode.stateless.model.api.chatgpt;
 
 import com.google.gson.annotations.SerializedName;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptRequestMessage;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptTool;
-import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.chatgpt.ChatGptToolChoice;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatRequestMessage;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatTool;
+import com.googlesource.gerrit.plugins.chatgpt.mode.common.model.api.openai.AIChatToolChoice;
 import lombok.Builder;
 import lombok.Data;
 
@@ -16,8 +16,8 @@ public class ChatGptCompletionRequest {
     private boolean stream;
     private double temperature;
     private int seed;
-    private List<ChatGptRequestMessage> messages;
-    private ChatGptTool[] tools;
+    private List<AIChatRequestMessage> messages;
+    private AIChatTool[] tools;
     @SerializedName("tool_choice")
-    private ChatGptToolChoice toolChoice;
+    private AIChatToolChoice toolChoice;
 }

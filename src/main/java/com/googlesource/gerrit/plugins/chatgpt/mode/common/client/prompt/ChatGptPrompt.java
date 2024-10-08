@@ -142,9 +142,9 @@ public class ChatGptPrompt {
     private void updateRelevanceDescription() {
         String relevanceDescription = DEFAULT_GPT_REPLIES_ATTRIBUTES.get(ATTRIBUTE_RELEVANCE);
         if (relevanceDescription.contains("%s")) {
-            String defaultGptRelevanceRules = config.getString(Configuration.KEY_GPT_RELEVANCE_RULES,
+            String defaultAIRelevanceRules = config.getString(Configuration.KEY_AI_RELEVANCE_RULES,
                     DEFAULT_GPT_RELEVANCE_RULES);
-            relevanceDescription = String.format(relevanceDescription, defaultGptRelevanceRules);
+            relevanceDescription = String.format(relevanceDescription, defaultAIRelevanceRules);
             DEFAULT_GPT_REPLIES_ATTRIBUTES.put(ATTRIBUTE_RELEVANCE, relevanceDescription);
         }
     }
