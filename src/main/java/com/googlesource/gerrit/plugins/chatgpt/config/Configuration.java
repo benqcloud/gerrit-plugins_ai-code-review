@@ -8,11 +8,14 @@ import com.google.gerrit.server.util.OneOffRequestContext;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.regex.Pattern;
 
 import static com.googlesource.gerrit.plugins.chatgpt.settings.Settings.Modes;
+import static com.googlesource.gerrit.plugins.chatgpt.settings.Settings.AIType;
+
 
 @Slf4j
 public class Configuration {
@@ -86,6 +89,8 @@ public class Configuration {
     private static final boolean DEFAULT_FORCE_CREATE_ASSISTANT = false;
     private static final boolean DEFAULT_ENABLE_MESSAGE_DEBUGGING = false;
 
+    public static final String AUTH_HEADER_API_KEY = "api-key";
+
     // Config setting keys
     public static final String KEY_GPT_SYSTEM_PROMPT = "gptSystemPrompt";
     public static final String KEY_GPT_RELEVANCE_RULES = "gptRelevanceRules";
@@ -95,8 +100,12 @@ public class Configuration {
     public static final String KEY_VOTING_MAX_SCORE = "votingMaxScore";
     public static final String KEY_GERRIT_USERNAME = "gerritUserName";
 
+    private static final String KEY_AI_TYPE = "aiType";
     private static final String KEY_GPT_TOKEN = "gptToken";
     private static final String KEY_GPT_DOMAIN = "gptDomain";
+    private static final String KEY_AI_CHAT_ENDPOINT = "aiChatEndpoint";
+    private static final String KEY_AI_AUTH_HEADER_NAME = "aiAuthHeaderName";
+
     private static final String KEY_GPT_MODEL = "gptModel";
     private static final String KEY_STREAM_OUTPUT = "gptStreamOutput";
     private static final String KEY_GPT_MODE = "gptMode";
@@ -162,7 +171,10 @@ public class Configuration {
     }
 
     public String getGptDomain() {
-        return getString(KEY_GPT_DOMAIN, OPENAI_DOMAIN);
+        String aiDomain = getString(KEY_GPT_DOMAIN, OPENAI_DOMAIN);
+        // trim end slash, so putting endpoint urls together is easier.
+        return aiDomain.endsWith("/") ?
+                aiDomain.substring(0, aiDomain.length() - 1) : aiDomain;
     }
 
     public String getGptModel() {
@@ -175,11 +187,25 @@ public class Configuration {
 
     public Modes getGptMode() {
         String mode = getString(KEY_GPT_MODE, DEFAULT_GPT_MODE);
-        try {
-            return Enum.valueOf(Modes.class, mode);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Illegal mode: " + mode, e);
-        }
+        return getValueAsEnum(Modes.class, mode);
+    }
+    public AIType getAIType(){
+        // return default type of CHATGPT if no value has been specified.
+        // Leaving the default behaviour of this plugin as it was historically.
+        String aiType = getString(KEY_AI_TYPE, "CHATGPT");
+        // for ease of use with enum, use toUpper, so we can always be case-sensitive on compares.
+        return getValueAsEnum( AIType.class, aiType.toUpperCase());
+    }
+
+    public String getChatEndpoint(){
+        // optional, and only used when combined with the "GENERIC" aiType, for testing
+        // of new or not yet supported ai frameworks.
+        return getString(KEY_AI_CHAT_ENDPOINT, "");
+    }
+    public String getAuthHeaderName(){
+        // optional, and only used when combined with the "GENERIC" aiType, for testing
+        // of new or not yet supported ai frameworks.
+        return getString(KEY_AI_AUTH_HEADER_NAME, "");
     }
 
     public boolean getGptReviewCommitMessages() {
@@ -338,6 +364,15 @@ public class Configuration {
 
     private Double getDouble(String key, Double defaultValue) {
         return Double.parseDouble(getString(key, String.valueOf(defaultValue)));
+    }
+
+    @NotNull
+    private static <T extends Enum<T>> T getValueAsEnum(Class<T> enumClass, String value) {
+        try {
+            return Enum.valueOf(enumClass, value);
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException(String.format("Illegal value: %s for enum class: %s", value, enumClass), e);
+        }
     }
 
     private List<String> splitConfig(String value) {

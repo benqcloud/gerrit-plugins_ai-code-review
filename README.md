@@ -1,13 +1,14 @@
-# ChatGPT Code Review Gerrit Plugin
+# AI Code Review Gerrit Plugin
 
 ## Features
 
-This plugin allows you to use ChatGPT for code review in Gerrit conveniently. After submitting a Patch Set, OpenAI will
-provide review feedback in the form of comments and, optionally, a vote.
-You can continue to ask ChatGPT by @{gerritUserName} or @{gerritEmailAddress} (provided that `gerritEmailAddress` is in
+This plugin allows you to use different AI Chat services, e.g. ChatGPT or OLLAMA for code review in Gerrit conveniently. 
+After submitting a Patch Set, OpenAI will provide review feedback in the form of comments and, optionally, a vote.
+You can continue to ask the AI Chat by @{gerritUserName} or @{gerritEmailAddress} (provided that `gerritEmailAddress` is in
 the form "gerritUserName@<any_email_domain>") in the comments to further guide it in generating more targeted review
 comments.
-Reviews can be also triggered by directing a comment with the `/review` command to ChatGPT.
+Reviews can be also triggered by directing a comment with the `/review` command which will be interpretted and sent on by
+the plugin.
 
 ## Getting Started
 
@@ -27,7 +28,7 @@ Reviews can be also triggered by directing a comment with the `/review` command 
 3. **Configure:** First, you need to create a ChatGPT user in Gerrit.
    Then, set up the basic parameters in your `$gerrit_site/etc/gerrit.config` file under the section
 
-   `[plugin "chatgpt-code-review-gerrit-plugin"]`:
+   `[plugin "ai-code-review"]`:
 
 - `gptToken`: OpenAI GPT token.
 - `gerritUserName`: Gerrit username of ChatGPT user.
@@ -40,10 +41,10 @@ Reviews can be also triggered by directing a comment with the `/review` command 
 4. **Verify:** After restarting Gerrit, you can see the following information in Gerrit's logs:
 
    ```bash
-   INFO com.google.gerrit.server.plugins.PluginLoader : Loaded plugin chatgpt-code-review-gerrit-plugin, version ...
+   INFO com.google.gerrit.server.plugins.PluginLoader : Loaded plugin ai-code-review, version ...
    ```
 
-   You can also check the status of the chatgpt-code-review-gerrit-plugin on Gerrit's plugin page as Enabled.
+   You can also check the status of the ai-code-review on Gerrit's plugin page as Enabled.
 
 ## Usage Examples
 
@@ -63,7 +64,8 @@ Upon receiving clarification, it resets the score to "0".
 
 ![Example of Dialogue](images/chatgpt_changed_mind.png?raw=true)
 
-More examples of ChatGPT's code reviews and inline discussions are available at
+More examples of ChatGPT's use within code reviews and inline discussions based on the origin ChatGPT
+version of this plugin are available at
 https://wiki.amarulasolutions.com/opensource/products/chatgpt-gerrit.html
 
 ## Configuration Parameters
@@ -77,7 +79,7 @@ To configure these parameters, you need to modify your Gerrit configuration file
 as follows:
 
 ```
-[plugin "chatgpt-code-review-gerrit-plugin"]
+[plugin "ai-code-review"]
     # Required parameters
     gptToken = {gptToken}
     ...
@@ -94,7 +96,7 @@ It is highly recommended to store sensitive information such as `gptToken` in th
 file. Please edit the file at $gerrit_site/etc/`secure.config` and include the following details:
 
 ```
-[plugin "chatgpt-code-review-gerrit-plugin"]
+[plugin "ai-code-review"]
     gptToken = {gptToken}
 ```
 
@@ -106,7 +108,7 @@ to: https://gerrit.googlesource.com/plugins/secure-config
 To add the following content, please edit the `project.config` file in `refs/meta/config`:
 
 ```
-[plugin "chatgpt-code-review-gerrit-plugin"]
+[plugin "ai-code-review"]
     # Required parameters
     gerritUserName = {gerritUserName}
     ...
@@ -151,6 +153,9 @@ on the specific requests made.
 
 ### Optional Parameters
 
+- `aiType`: Allows the selection of different ai chat services the current list is ChatGPT, Ollama, AzureOpenAI and General. 
+For compatibility the default is ChatGPT when not specified.  Note: General is used to allow the specification of new
+uri endpoints, and different authorization headers to allow new service testing more quickly.
 - `gptMode`: Select whether requests are processed in Stateless or Stateful mode. For backward compatibility, the
 default value is `stateless`. To enable Stateful mode, set this parameter to `stateful`.
 - `gptModel`: The default model is `gpt-4o`. You can also configure it to `gpt-3.5-turbo` or `gpt-4-turbo`.
