@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1eaa34e8_ecafac4b",
+        "filename": "README.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-10-23T05:58:25Z",
+      "side": 1,
+      "message": "A bunch of trailing white-spaces in file",
+      "revId": "19fef3d7cdcce41bf91cd757f784a4c6c8144f87",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e8cb803_fb65748a",
+        "filename": "README.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-10-23T05:58:25Z",
+      "side": 1,
+      "message": "```suggestion\n- `aiType`: Allows the selection of different ai chat services the current list is ChatGPT, Ollama, AzureOpenAI and Generic.\n```\n?\nBelow there\u0027s a mention of a `GENERIC` type, I\u0027m guessing it is this type it refers to.",
+      "range": {
+        "startLine": 219,
+        "startChar": 116,
+        "endLine": 219,
+        "endChar": 123
+      },
+      "revId": "19fef3d7cdcce41bf91cd757f784a4c6c8144f87",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23742c00_ba640f15",
+        "filename": "README.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-10-23T05:58:25Z",
+      "side": 1,
+      "message": "Same here\n```suggestion\n    For compatibility the default is ChatGPT when not specified.  Note: Generic is used to allow the specification of new\n```\n?",
+      "range": {
+        "startLine": 220,
+        "startChar": 72,
+        "endLine": 220,
+        "endChar": 79
+      },
+      "revId": "19fef3d7cdcce41bf91cd757f784a4c6c8144f87",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
