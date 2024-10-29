@@ -65,6 +65,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c730da8f_e63dcc26",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/interfaces/mode/common/client/api/gerrit/IGerritClientPatchSet.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T20:58:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d40b42fb_8f2bc035",
+      "range": {
+        "startLine": 9,
+        "startChar": 17,
+        "endLine": 9,
+        "endChar": 38
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9bbd7a61_6dfd0163",
@@ -78,6 +102,30 @@
       "writtenOn": "2024-10-29T12:50:59Z",
       "side": 1,
       "message": "Same convention here, would prefer `AIClient`",
+      "range": {
+        "startLine": 7,
+        "startChar": 17,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d928eb5c_3780ffce",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/interfaces/mode/common/client/api/openapi/IChatAIClient.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T20:58:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9bbd7a61_6dfd0163",
       "range": {
         "startLine": 7,
         "startChar": 17,
@@ -111,6 +159,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a726d2ed_6a011bc3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/interfaces/mode/common/client/prompt/IChatAIDataPrompt.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T20:58:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cfb2e4a6_8891dddf",
+      "range": {
+        "startLine": 8,
+        "startChar": 17,
+        "endLine": 8,
+        "endChar": 34
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86633791_9b2f96f4",
@@ -124,6 +196,30 @@
       "writtenOn": "2024-10-29T12:50:59Z",
       "side": 1,
       "message": "```suggestion\n    private final IChatAIDataPrompt aIDataPromptHandler;\n```",
+      "range": {
+        "startLine": 18,
+        "startChar": 36,
+        "endLine": 18,
+        "endChar": 60
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7db1221_1da421a8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/client/prompt/AIChatDataPrompt.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T20:58:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "86633791_9b2f96f4",
       "range": {
         "startLine": 18,
         "startChar": 36,
@@ -157,6 +253,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3eb3768c_e45d55af",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/client/prompt/AIChatDataPromptBase.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T20:58:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "37b2bb01_67b41531",
+      "range": {
+        "startLine": 29,
+        "startChar": 28,
+        "endLine": 29,
+        "endChar": 45
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a184e89_5cff3cb9",
@@ -170,6 +290,30 @@
       "writtenOn": "2024-10-29T12:50:59Z",
       "side": 1,
       "message": "```suggestion\nimport static com.googlesource.gerrit.plugins.aicodereview.settings.Settings.AI_ROLE_USER;\n```",
+      "range": {
+        "startLine": 13,
+        "startChar": 90,
+        "endLine": 13,
+        "endChar": 95
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43695a81_544a179b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/client/prompt/AIChatDataPromptRequests.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T20:58:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1a184e89_5cff3cb9",
       "range": {
         "startLine": 13,
         "startChar": 90,
@@ -203,6 +347,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4bb6776_014d1e39",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/client/prompt/AIChatGptPrompt.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T20:58:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c81426f4_b85bed75",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 5
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5c82fa9_8a9443b7",
@@ -226,6 +394,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc90a6d6_7aff9702",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/client/prompt/AIChatHistory.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T20:58:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a5c82fa9_8a9443b7",
+      "range": {
+        "startLine": 89,
+        "startChar": 58,
+        "endLine": 89,
+        "endChar": 66
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf94a8a3_f8a33b00",
@@ -239,6 +431,30 @@
       "writtenOn": "2024-10-29T12:50:59Z",
       "side": 1,
       "message": "```suggestion\n        return config.getIgnoreResolvedAIComments() \u0026\u0026 isFromAssistant(comment) \u0026\u0026 comment.isResolved() ||\n```",
+      "range": {
+        "startLine": 122,
+        "startChar": 22,
+        "endLine": 122,
+        "endChar": 54
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16e720f2_8b164cdd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/client/prompt/AIChatHistory.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T20:58:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bf94a8a3_f8a33b00",
       "range": {
         "startLine": 122,
         "startChar": 22,
@@ -274,6 +490,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "104821e9_61b8dd04",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/client/prompt/AIChatPromptFactory.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T20:58:49Z",
+      "side": 1,
+      "message": "Currently I hadn\u0027t updated the stateful requests to match -\u003e only stateless was tested. In the README, and in the commit message I have listed that the STATEFUL APIs are still todo.\nIt is because they use the assistants/v2 API which is a beta endpoint from chatGPT, so I need to work out an equivilent, and then rework the API to support it.  Its a bit too early to do this, as it might not make sense to have an AIChatAssistants object instead of ChatGPTAssistants if there isn\u0027t one etc. \n\nBut I will update ASAP as I get stateful requests working.",
+      "parentUuid": "295171a1_7661f4a1",
+      "range": {
+        "startLine": 20,
+        "startChar": 18,
+        "endLine": 20,
+        "endChar": 40
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2f538d3_bc72c92b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/client/prompt/AIChatPromptFactory.java",
         "patchSetId": 12
@@ -285,6 +525,30 @@
       "writtenOn": "2024-10-29T12:50:59Z",
       "side": 1,
       "message": "```suggestion\n    public static IChatAIDataPrompt getAIDataPrompt(\n```",
+      "range": {
+        "startLine": 34,
+        "startChar": 39,
+        "endLine": 34,
+        "endChar": 45
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "257f0181_8431c4fb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/client/prompt/AIChatPromptFactory.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T20:58:49Z",
+      "side": 1,
+      "message": "I will update this method, as it should return the ChatAIDataPrompt, which is generic - it just only returns a ChatGPT concrete type currently as its the only stateful request type.",
+      "parentUuid": "c2f538d3_bc72c92b",
       "range": {
         "startLine": 34,
         "startChar": 39,
@@ -320,6 +584,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2452bf31_706a7c8f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/model/patch/code/CodeFinderDiff.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T20:58:49Z",
+      "side": 1,
+      "message": "It probably should, as its a java17 project but this already exists as a DTO.  I will definately update this is a seperate review, as its not related to the use of private AI services, or we may have a lot of scope creep.",
+      "parentUuid": "71d9d07c_fa5319b1",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 1
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "62305f1b_bb1c4389",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/stateful/client/api/chatgpt/AIChatClientStateful.java",
         "patchSetId": 12
@@ -331,6 +619,30 @@
       "writtenOn": "2024-10-29T12:50:59Z",
       "side": 1,
       "message": "Is `Chat` meaningful here, doesn\u0027t the chat part come from chant-gpt? Should it rather be `AIClientStateful`.",
+      "range": {
+        "startLine": 23,
+        "startChar": 15,
+        "endLine": 23,
+        "endChar": 19
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b246f5c_6f44260d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/stateful/client/api/chatgpt/AIChatClientStateful.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T20:58:49Z",
+      "side": 1,
+      "message": "I can see why you would think that. But the chat comes from the fact that most of these were considered /api/chat/XXX requests as part of the Open AI chat API.   E.g. /api/chat/completions is the ollama endpoint for the code review.  See here: https://github.com/ollama/ollama/blob/main/docs/openai.md?plain\u003d1#L21",
+      "parentUuid": "62305f1b_bb1c4389",
       "range": {
         "startLine": 23,
         "startChar": 15,
