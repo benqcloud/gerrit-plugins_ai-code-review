@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a69bc454_a6931df0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T21:18:36Z",
+      "side": 1,
+      "message": "Thanks for your very good review - you have spent a good while.  I have made almost all of them, except where it overlaps with stateful requests which I haven\u0027t touched as yet, and they dont align with the same api endpoints. Otherwise all changes have been made for all other stateful requests, method renaming, and tidy ups. \nI agree a formatter should be added to the maven description and maybe a checkstyle plugin to enforce styling.  \nI would love a side project here, to create a Gerrit Plugin maven archetype project, which would allow anyone to create a new plugin using maven out of the box with the exact formatter / styling and findbugs / spotbugs that we wish, which would be really useful. \nIts much easier than following the manual readme steps when its all done automatically for you. 👍\n\nLet me know what you think of this last review, hopefully I can get it built, and submitted so we can move onto test containers and other fixes.",
+      "parentUuid": "78033587_bcc3a5d0",
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e85c4ee_9c3c2d6f",
@@ -512,6 +530,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0accf4cd_fd09b6a6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/client/prompt/AIChatPromptFactory.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T21:18:36Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "104821e9_61b8dd04",
+      "range": {
+        "startLine": 20,
+        "startChar": 18,
+        "endLine": 20,
+        "endChar": 40
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2f538d3_bc72c92b",
@@ -559,6 +601,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "725c9e84_74c13fc1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/client/prompt/AIChatPromptFactory.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T21:18:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "257f0181_8431c4fb",
+      "range": {
+        "startLine": 34,
+        "startChar": 39,
+        "endLine": 34,
+        "endChar": 45
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71d9d07c_fa5319b1",
@@ -596,6 +662,30 @@
       "side": 1,
       "message": "It probably should, as its a java17 project but this already exists as a DTO.  I will definately update this is a seperate review, as its not related to the use of private AI services, or we may have a lot of scope creep.",
       "parentUuid": "71d9d07c_fa5319b1",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 1
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "383e2844_c4f760fd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/model/patch/code/CodeFinderDiff.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T21:18:36Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2452bf31_706a7c8f",
       "range": {
         "startLine": 9,
         "startChar": 0,
