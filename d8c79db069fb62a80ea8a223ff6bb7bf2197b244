@@ -1,0 +1,320 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78033587_bcc3a5d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-10-29T12:50:59Z",
+      "side": 1,
+      "message": "Awesome initiative and job Trevor, much appreciated.\nDid a run through of the files and made some suggestions (since they are easier than trying to explain).\nDoing  a thorough code-review would take me a week 😊\n\n\nGenerally:\n* It feels to me like when classes/interfaces/... are generalized`chatgpt` and `gpt` should be replaced with `ai` and not `aichat`.\n\nOther notes (not related to this commit):\n* The source-code could benefit from google-java-format, but that should be done in a follow-up.\n* Should probably not be done in this change (since there are already a bunch of data-classes.) but using `records` instead of data-classes (requires GSon 2.10, don\u0027t know which version Gerrit is using...).",
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e85c4ee_9c3c2d6f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/interfaces/mode/common/client/api/gerrit/IGerritClientPatchSet.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-10-29T12:50:59Z",
+      "side": 1,
+      "message": "`I$INTERFACE_NAME` pattern is a C# convention, in Gerrit\u0027s code-base I don\u0027t think there\u0027s any naming conventions for interfaces.\nI would prefer `GerritClientPatchset`.",
+      "range": {
+        "startLine": 9,
+        "startChar": 17,
+        "endLine": 9,
+        "endChar": 38
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bbd7a61_6dfd0163",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/interfaces/mode/common/client/api/openapi/IChatAIClient.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-10-29T12:50:59Z",
+      "side": 1,
+      "message": "Same convention here, would prefer `AIClient`",
+      "range": {
+        "startLine": 7,
+        "startChar": 17,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfb2e4a6_8891dddf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/interfaces/mode/common/client/prompt/IChatAIDataPrompt.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-10-29T12:50:59Z",
+      "side": 1,
+      "message": "Same convention here, would prefer `AIDataPromt`",
+      "range": {
+        "startLine": 8,
+        "startChar": 17,
+        "endLine": 8,
+        "endChar": 34
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86633791_9b2f96f4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/client/prompt/AIChatDataPrompt.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-10-29T12:50:59Z",
+      "side": 1,
+      "message": "```suggestion\n    private final IChatAIDataPrompt aIDataPromptHandler;\n```",
+      "range": {
+        "startLine": 18,
+        "startChar": 36,
+        "endLine": 18,
+        "endChar": 60
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37b2bb01_67b41531",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/client/prompt/AIChatDataPromptBase.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-10-29T12:50:59Z",
+      "side": 1,
+      "message": "```suggestion\n    protected AIChatHistory aIMessageHistory;\n```",
+      "range": {
+        "startLine": 29,
+        "startChar": 28,
+        "endLine": 29,
+        "endChar": 45
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a184e89_5cff3cb9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/client/prompt/AIChatDataPromptRequests.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-10-29T12:50:59Z",
+      "side": 1,
+      "message": "```suggestion\nimport static com.googlesource.gerrit.plugins.aicodereview.settings.Settings.AI_ROLE_USER;\n```",
+      "range": {
+        "startLine": 13,
+        "startChar": 90,
+        "endLine": 13,
+        "endChar": 95
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c81426f4_b85bed75",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/client/prompt/AIChatGptPrompt.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-10-29T12:50:59Z",
+      "side": 1,
+      "message": "Normally you would do this the other way around:\n\n\n```suggestion\n    public AIChatGptPrompt(Configuration config) {\n        this(config, false);\n    }\n\n    public AIChatGptPrompt(Configuration config, boolean isCommentEvent) {\n        this.config \u003d config;\n        this.isCommentEvent \u003d isCommentEvent;\n        // Avoid repeated loading of prompt constants\n        if (DEFAULT_GPT_SYSTEM_PROMPT \u003d\u003d null) {\n            loadDefaultPrompts(\"prompts\");\n        }\n    }\n```",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 5
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5c82fa9_8a9443b7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/client/prompt/AIChatHistory.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-10-29T12:50:59Z",
+      "side": 1,
+      "message": "```suggestion\n        return isFromAssistant(currentComment) ? Settings.AI_ROLE_ASSISTANT : Settings.AI_ROLE_USER;\n```",
+      "range": {
+        "startLine": 89,
+        "startChar": 58,
+        "endLine": 89,
+        "endChar": 66
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf94a8a3_f8a33b00",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/client/prompt/AIChatHistory.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-10-29T12:50:59Z",
+      "side": 1,
+      "message": "```suggestion\n        return config.getIgnoreResolvedAIComments() \u0026\u0026 isFromAssistant(comment) \u0026\u0026 comment.isResolved() ||\n```",
+      "range": {
+        "startLine": 122,
+        "startChar": 22,
+        "endLine": 122,
+        "endChar": 54
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "295171a1_7661f4a1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/client/prompt/AIChatPromptFactory.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-10-29T12:50:59Z",
+      "side": 1,
+      "message": "Is it always a `IChatGptPromptStateful` isn\u0027t there a `AIPromptStateful`?",
+      "range": {
+        "startLine": 20,
+        "startChar": 18,
+        "endLine": 20,
+        "endChar": 40
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2f538d3_bc72c92b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/client/prompt/AIChatPromptFactory.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-10-29T12:50:59Z",
+      "side": 1,
+      "message": "```suggestion\n    public static IChatAIDataPrompt getAIDataPrompt(\n```",
+      "range": {
+        "startLine": 34,
+        "startChar": 39,
+        "endLine": 34,
+        "endChar": 45
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71d9d07c_fa5319b1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/common/model/patch/code/CodeFinderDiff.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-10-29T12:50:59Z",
+      "side": 1,
+      "message": "Should this be a record?\nhttps://www.baeldung.com/java-record-keyword",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 1
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62305f1b_bb1c4389",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/stateful/client/api/chatgpt/AIChatClientStateful.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-10-29T12:50:59Z",
+      "side": 1,
+      "message": "Is `Chat` meaningful here, doesn\u0027t the chat part come from chant-gpt? Should it rather be `AIClientStateful`.",
+      "range": {
+        "startLine": 23,
+        "startChar": 15,
+        "endLine": 23,
+        "endChar": 19
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
