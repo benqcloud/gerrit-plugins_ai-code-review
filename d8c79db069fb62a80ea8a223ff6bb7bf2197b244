@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d40b42fb_8f2bc035",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/interfaces/mode/common/client/api/gerrit/IGerritClientPatchSet.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T16:56:13Z",
+      "side": 1,
+      "message": "You have a lot of good comments below, I will sort them.  Most of them are existing issues, in that I just forked the plugin and renamed in most cases.  The I convention is not in java as you correctly point out, so I will use this opportunity to sort what I can.  I wish I had a verifier build approved, so we knew if the build actually worked next :p",
+      "parentUuid": "5e85c4ee_9c3c2d6f",
+      "range": {
+        "startLine": 9,
+        "startChar": 17,
+        "endLine": 9,
+        "endChar": 38
+      },
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9bbd7a61_6dfd0163",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/interfaces/mode/common/client/api/openapi/IChatAIClient.java",
         "patchSetId": 12
