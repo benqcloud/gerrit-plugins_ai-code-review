@@ -36,6 +36,23 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98537981_a2ef1482",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-10-29T23:54:42Z",
+      "side": 1,
+      "message": "I had a first look at this change after attending your session at the user summit\n\n- great stuff :-)\n- and a huge change ;-) which makes it hard to review\n- please don\u0027t add more to this change, I\u0027d rather consider to split it into multiple smaller ones\n\nHow about adding license headers to the source code files, like we do in Gerrit core and all other plugins ?\n\nI think we should use google-java-format to auto-format the sources also in this plugin.\n\nI noticed that most of the dependencies are quite outdated, if you agree I can push changes updating them.\n\nI started looking into adding a bazel in-tree build to enable building the plugin into the Gerrit war file. We do this for all plugins we use to simplify packaging and deployments. I am almost there, though still struggling with lombok annotation processing. How about migrating to using Java records ?",
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e85c4ee_9c3c2d6f",
