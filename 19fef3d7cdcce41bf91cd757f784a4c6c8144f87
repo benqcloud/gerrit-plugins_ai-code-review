@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d261ecc_b5caccb5",
+        "filename": "README.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T16:44:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1eaa34e8_ecafac4b",
+      "revId": "19fef3d7cdcce41bf91cd757f784a4c6c8144f87",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e8cb803_fb65748a",
@@ -41,6 +59,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3643fa5_f626febb",
+        "filename": "README.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T16:44:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8e8cb803_fb65748a",
+      "range": {
+        "startLine": 219,
+        "startChar": 116,
+        "endLine": 219,
+        "endChar": 123
+      },
+      "revId": "19fef3d7cdcce41bf91cd757f784a4c6c8144f87",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23742c00_ba640f15",
@@ -54,6 +96,30 @@
       "writtenOn": "2024-10-23T05:58:25Z",
       "side": 1,
       "message": "Same here\n```suggestion\n    For compatibility the default is ChatGPT when not specified.  Note: Generic is used to allow the specification of new\n```\n?",
+      "range": {
+        "startLine": 220,
+        "startChar": 72,
+        "endLine": 220,
+        "endChar": 79
+      },
+      "revId": "19fef3d7cdcce41bf91cd757f784a4c6c8144f87",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef8505d8_98743760",
+        "filename": "README.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-29T16:44:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "23742c00_ba640f15",
       "range": {
         "startLine": 220,
         "startChar": 72,
