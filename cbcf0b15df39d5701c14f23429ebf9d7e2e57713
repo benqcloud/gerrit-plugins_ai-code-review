@@ -1,6 +1,57 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2ddd8c7_bd7e91f2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-10-30T19:50:26Z",
+      "side": 1,
+      "message": "Build master using Java 21",
+      "revId": "cbcf0b15df39d5701c14f23429ebf9d7e2e57713",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5eb17a92_a5177873",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-10-30T19:50:26Z",
+      "side": 1,
+      "message": "I think this should be moved to a review comment",
+      "revId": "cbcf0b15df39d5701c14f23429ebf9d7e2e57713",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7c6a305_e3c12fbe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-10-30T19:50:26Z",
+      "side": 1,
+      "message": "Mention the updated dependencies here ?\nAre these updates necessary to update to Java 21 ?",
+      "revId": "cbcf0b15df39d5701c14f23429ebf9d7e2e57713",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ef3798d6_d093dfd3",
