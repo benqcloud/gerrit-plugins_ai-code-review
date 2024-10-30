@@ -53,6 +53,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6aa89769_53bd7923",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-30T14:10:07Z",
+      "side": 1,
+      "message": "I agree with all of the above changes, if adding bazel - lets keep both bazel and maven for as long  we can like jgit, so we can build both ways.  \nAll other changes are great - I want to get this checked in and then get test containers review up to get real testing against an ollama.",
+      "parentUuid": "98537981_a2ef1482",
+      "revId": "d8c79db069fb62a80ea8a223ff6bb7bf2197b244",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e85c4ee_9c3c2d6f",
