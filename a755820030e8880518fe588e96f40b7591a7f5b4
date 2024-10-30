@@ -16,6 +16,24 @@
       "message": "This looks good to me (FWIW).\nIt\u0027s a too big change to do a proper review review and it can be a daunting task to break it down in to manageable pieces at this stage.\nPersonally I would be fine with merging this as a first stab and work iteratively from here.\nAfter this we should plug it in to the plugin CI pipeline at gerrit-review/GerritForge.",
       "revId": "a755820030e8880518fe588e96f40b7591a7f5b4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afe22ad7_fc776034",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-30T14:23:08Z",
+      "side": 1,
+      "message": "I agree, we wanted to get this in during the hackathon as a single push, but the fact it had no verify score pushed it back.  So it would be great to cap this here, get it building and into the plugins ci pipeline so there is an official location to get the jar file. thanks. \nIve a seperate review to get us a verified +1 score for this build in the interim. If not lets get it in a built either way so bazel verifier can take over. \n\n+2 anyone ?",
+      "parentUuid": "09184ce5_88071c5a",
+      "revId": "a755820030e8880518fe588e96f40b7591a7f5b4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
