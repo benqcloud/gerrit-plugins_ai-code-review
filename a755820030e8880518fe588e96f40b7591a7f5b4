@@ -34,6 +34,24 @@
       "parentUuid": "09184ce5_88071c5a",
       "revId": "a755820030e8880518fe588e96f40b7591a7f5b4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b55ac71_8cb1dee7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-10-30T14:29:16Z",
+      "side": 1,
+      "message": "Isn\u0027t a manual verification enough at this stage?\nIf it compiles and the tests are ok we can look at bazel and pipeline integration later?",
+      "parentUuid": "afe22ad7_fc776034",
+      "revId": "a755820030e8880518fe588e96f40b7591a7f5b4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
