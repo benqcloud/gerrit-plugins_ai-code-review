@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2926ccf_d0420dbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-10-30T23:27:35Z",
+      "side": 1,
+      "message": "@davido: could you help with adding annotation processing for lombok usage in this plugin ?",
+      "revId": "a2b86343b3576c8e6d67756643152d0c93dfdf6e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
