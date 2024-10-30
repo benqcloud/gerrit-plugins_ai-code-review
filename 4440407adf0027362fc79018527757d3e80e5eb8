@@ -33,6 +33,24 @@
       "message": "I would split this into two changes:\n- set version to 3.8.0\n- update dependencies, this change can then be merged to master to bring the updates there instead of double maintenance",
       "revId": "4440407adf0027362fc79018527757d3e80e5eb8",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab83d043_7c5a53c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-30T23:44:16Z",
+      "side": 1,
+      "message": "Ok, I will update the items directly here to get the builds working, and do dependency first, merge that forward, and then the versioning change.",
+      "parentUuid": "14147c96_0b45feb1",
+      "revId": "4440407adf0027362fc79018527757d3e80e5eb8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ],
   "submitRequirementResults": [

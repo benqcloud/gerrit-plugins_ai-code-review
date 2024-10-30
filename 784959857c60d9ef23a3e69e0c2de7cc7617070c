@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a175c294_e4030aee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-30T23:44:16Z",
+      "side": 1,
+      "message": "I can actually do the versioning changes as direct pushes afterwards also, to avoid a simple review, and perform the msater change then rebase master, which will get these updates and it will only contain the JDK21 specific updates then.",
+      "revId": "784959857c60d9ef23a3e69e0c2de7cc7617070c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
