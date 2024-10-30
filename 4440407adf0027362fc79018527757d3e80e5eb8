@@ -16,6 +16,23 @@
       "message": "New JDK17 stable-3.8 branch to cover JDK17 work verification, leaving JDK21 on master ( which will become stable-3.11 shortly. )\nIf you are happy I can +1 verified this item, as soon as its code reviewed as we have no verifier job submitted as yet.",
       "revId": "4440407adf0027362fc79018527757d3e80e5eb8",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14147c96_0b45feb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-10-30T19:53:38Z",
+      "side": 1,
+      "message": "I would split this into two changes:\n- set version to 3.8.0\n- update dependencies, this change can then be merged to master to bring the updates there instead of double maintenance",
+      "revId": "4440407adf0027362fc79018527757d3e80e5eb8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
