@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef3798d6_d093dfd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-30T19:04:24Z",
+      "side": 1,
+      "message": "I have manually added +1 verified score, as we have no verify build until the ci-scripts change I have made is reviewed.  Once this is in we will have MASTER builds should work as they are JDK21.",
+      "revId": "cbcf0b15df39d5701c14f23429ebf9d7e2e57713",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
