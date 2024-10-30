@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd26a628_2d9e0564",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-30T23:58:29Z",
+      "side": 1,
+      "message": "Adding google format is great, although this is JDK17 format, master has moved forward to JDK21.  If you could please rebase onto tip, it otherwise looks great. thanks.",
+      "revId": "2ce259dde6d4fd2f3d19d10727c8cd76655a554f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
