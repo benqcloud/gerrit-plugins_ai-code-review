@@ -52,6 +52,24 @@
       "parentUuid": "afe22ad7_fc776034",
       "revId": "a755820030e8880518fe588e96f40b7591a7f5b4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "458b4978_88596f68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-30T15:01:56Z",
+      "side": 1,
+      "message": "Yes, I am fine if someone with gerrit-be permissions adds the +1 verified score. I have raised the maven verified review to allow it to actually give us a correct +1 score, but this can absolutely be considered a different bit of work, and get this checked in.\nOr should I just +1 verified myself in the meantime?",
+      "parentUuid": "3b55ac71_8cb1dee7",
+      "revId": "a755820030e8880518fe588e96f40b7591a7f5b4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
