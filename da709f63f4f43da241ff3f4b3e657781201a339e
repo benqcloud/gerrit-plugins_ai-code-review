@@ -16,6 +16,23 @@
       "message": "nothing wrong with this review, but how about doing this automatically. I could send you a pom file update to do this automatically every build. And just do src/main and src/test by default?",
       "revId": "da709f63f4f43da241ff3f4b3e657781201a339e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e0da032_af2e045c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-31T00:15:14Z",
+      "side": 1,
+      "message": "All headers have an extra quoting // at the start so have // // on each line.  Try the pom I have sent to you as it will update them automatically with your build.",
+      "revId": "da709f63f4f43da241ff3f4b3e657781201a339e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
