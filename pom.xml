@@ -7,7 +7,7 @@
     <groupId>com.googlesource.gerrit.plugins</groupId>
     <artifactId>ai-code-review</artifactId>
     <packaging>jar</packaging>
-    <version>4.0.0</version>
+    <version>3.8.0</version>
 
     <!-- license header information -->
     <inceptionYear>2018</inceptionYear>
