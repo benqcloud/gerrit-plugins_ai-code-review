@@ -7,7 +7,7 @@
     <groupId>com.googlesource.gerrit.plugins</groupId>
     <artifactId>ai-code-review</artifactId>
     <packaging>jar</packaging>
-    <version>4.0.0</version>
+    <version>3.8.0</version>
     <properties>
         <Gerrit-ApiType>plugin</Gerrit-ApiType>
         <!-- Default the gerrit-api version to the lowest version that uses JDK17 by default, the same as this project.
