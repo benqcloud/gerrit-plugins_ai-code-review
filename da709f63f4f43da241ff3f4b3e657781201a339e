@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "955a80fc_bd10f7e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-31T00:07:46Z",
+      "side": 1,
+      "message": "nothing wrong with this review, but how about doing this automatically. I could send you a pom file update to do this automatically every build. And just do src/main and src/test by default?",
+      "revId": "da709f63f4f43da241ff3f4b3e657781201a339e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
