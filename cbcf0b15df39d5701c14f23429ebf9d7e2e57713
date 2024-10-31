@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91bb9986_9342967a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-31T16:40:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2ddd8c7_bd7e91f2",
+      "revId": "cbcf0b15df39d5701c14f23429ebf9d7e2e57713",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5eb17a92_a5177873",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-10-30T19:50:26Z",
       "side": 1,
       "message": "I think this should be moved to a review comment",
+      "revId": "cbcf0b15df39d5701c14f23429ebf9d7e2e57713",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aeba5b69_d4c17f2e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-31T16:40:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5eb17a92_a5177873",
       "revId": "cbcf0b15df39d5701c14f23429ebf9d7e2e57713",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -66,6 +102,24 @@
       "side": 1,
       "message": "Yes the dependencies were updated as without them the JDK21 build doesn\u0027t work.  Mockito-inline doesn\u0027t support JDK21 until 5.x and byte-buddy needs updating to latest to support JDK21 ( support has just been added ).  that being said, I have updated these items in the stable branch, so if I get it merged I will merge these changes forward into master, and this change will simply become the JDK21 only changes.  So if you can review the stable-3.8 change first, this will get another patchset.",
       "parentUuid": "f7c6a305_e3c12fbe",
+      "revId": "cbcf0b15df39d5701c14f23429ebf9d7e2e57713",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "234b5bce_1ab10871",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-10-31T16:40:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0a2b8f20_94b0bbb2",
       "revId": "cbcf0b15df39d5701c14f23429ebf9d7e2e57713",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
