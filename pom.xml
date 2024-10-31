@@ -8,6 +8,10 @@
     <artifactId>ai-code-review</artifactId>
     <packaging>jar</packaging>
     <version>4.0.0</version>
+
+    <!-- license header information -->
+    <inceptionYear>2018</inceptionYear>
+
     <properties>
         <Gerrit-ApiType>plugin</Gerrit-ApiType>
         <!-- Default the gerrit-api version to the lowest version that uses JDK17 by default, the same as this project.
@@ -15,6 +19,29 @@
          on later versions, it just allows it to be backward compatible back to this min version ( unless we actually need to use a feature from a later API spec -->
         <Gerrit-ApiVersion>3.7.9</Gerrit-ApiVersion>
         <maven.test.skip>false</maven.test.skip>
+
+        <!-- License header checking, lets check and update by default -->
+        <skipLicenseHeadersCheck>false</skipLicenseHeadersCheck>
+        <!-- Licence header generation / auto-update of file headers -->
+        <skipLicenseHeadersUpdate>false</skipLicenseHeadersUpdate>
+
+        <copyrightNotice>Copyright ${project.inceptionYear}-${current.year} The Android Open Source Project</copyrightNotice>
+        <apacheLicenseHeaderText><![CDATA[
+${copyrightNotice}
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+]]>
+        </apacheLicenseHeaderText>
     </properties>
     <build>
         <plugins>
@@ -179,5 +206,96 @@
             <version>4.1.0</version>
         </dependency>
     </dependencies>
+
+
+    <profiles>
+        <!-- Update the license headers if required -->
+        <profile>
+            <id>update-and-check-license-headers</id>
+            <!-- To disable licence header generation and checking, you can
+             add a file called deactivate-license-headers, this will prevent this profile
+              from even being loaded.  DO NOT Check in this file, it is just a handy way to keep it turned
+              off in project for your dev use.  On a per build level, use the skip options:
+              <skipLicenseHeadersCheck>true</skipLicenseHeadersCheck> or
+              <skipLicenseHeadersUpdate>true</skipLicenseHeadersUpdate>
+              to disable specific elements of the checking for an entire project build -->
+            <activation>
+                <file>
+                    <missing>deactivate-license-headers</missing>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.mycila</groupId>
+                        <artifactId>license-maven-plugin</artifactId>
+                        <version>4.3</version>
+                        <configuration>
+                            <licenseSets>
+                                <licenseSet>
+                                    <inlineHeader>${apacheLicenseHeaderText}</inlineHeader>
+                                    <includes>
+                                        <include>**/src/**</include>
+                                    </includes>
+                                    <excludes>
+                                        <exclude>**/resources/**</exclude>
+                                    </excludes>
+                                </licenseSet>
+                            </licenseSets>
+                            <mapping>
+                                <java>PHP</java>
+                            </mapping>
+                            <skip>${skipLicenseHeadersCheck}</skip>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>update-license-headers</id>
+                                <phase>process-sources</phase>
+                                <goals>
+                                    <goal>format</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${skipLicenseHeadersUpdate}</skip>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>check-license-headers</id>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${skipLicenseHeadersCheck}</skip>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- Generate dynamic current.year property for use in license headers -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>timestamp-property</id>
+                                <goals>
+                                    <goal>timestamp-property</goal>
+                                </goals>
+                                <phase>validate</phase>
+                                <configuration>
+                                    <name>current.year</name>
+                                    <pattern>yyyy</pattern>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>parse-version</id>
+                                <goals>
+                                    <goal>parse-version</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

@@ -347,3 +347,20 @@ The `reset` option can be employed to restore modified settings to their origina
 ## License
 
 Apache License 2.0
+
+## License Coppright header checking and auto update.
+This project can now automatically check that all files have the correct copyright header
+as specified in the maven build file.  If some files exist without the header it will fail the build.
+Both the update and checking are now within a new profile called update-and-check-licence-headers which is enabled by
+default at the project level.
+
+- `skipLicenseHeadersUpdate`: To skip the automatic update processing of each file.
+- `skipLicenseHeadersCheck`: To skip the checking of the licence headers in each file.
+
+Of course any stage you can disable the running of either step either by passing it as a maven
+property on the command line e.g.
+
+```mvn <phase> -DskipLicenseHeadersUpdate=true```
+
+We can also change the default behaviour by flipping the values in the project pom file, so
+that either operation doesn't happen by default if required. 
