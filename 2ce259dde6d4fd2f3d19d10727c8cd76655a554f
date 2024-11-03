@@ -33,6 +33,23 @@
       "message": "Just needs rebased first.",
       "revId": "2ce259dde6d4fd2f3d19d10727c8cd76655a554f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86fb1e75_712e2006",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-11-03T21:42:03Z",
+      "side": 1,
+      "message": "Please check on java21 before submitting, using my review, just to make sure its not going to conflict, otherwise its fine.",
+      "revId": "2ce259dde6d4fd2f3d19d10727c8cd76655a554f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
