@@ -7,13 +7,10 @@
     <groupId>com.googlesource.gerrit.plugins</groupId>
     <artifactId>ai-code-review</artifactId>
     <packaging>jar</packaging>
-    <version>3.8.0</version>
+    <version>3.9.0</version>
     <properties>
         <Gerrit-ApiType>plugin</Gerrit-ApiType>
-        <!-- Default the gerrit-api version to the lowest version that uses JDK17 by default, the same as this project.
-        because we can't run on JDK11, but equally we wish to support as many gerrit versions for this plugin as possible, this doesn't mean this wont run
-         on later versions, it just allows it to be backward compatible back to this min version ( unless we actually need to use a feature from a later API spec -->
-        <Gerrit-ApiVersion>3.7.9</Gerrit-ApiVersion>
+        <Gerrit-ApiVersion>3.9.7</Gerrit-ApiVersion>
         <maven.test.skip>false</maven.test.skip>
     </properties>
     <build>
