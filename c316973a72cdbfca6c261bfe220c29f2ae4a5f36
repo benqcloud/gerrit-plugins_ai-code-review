@@ -33,6 +33,24 @@
       "message": "I would remove this comment",
       "revId": "c316973a72cdbfca6c261bfe220c29f2ae4a5f36",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6123fbb1_c23f081b",
+        "filename": "pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-11-05T20:31:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6d989a95_0b14830d",
+      "revId": "c316973a72cdbfca6c261bfe220c29f2ae4a5f36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
