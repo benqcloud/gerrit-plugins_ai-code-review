@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddbb6981_180d827d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-11-06T06:51:23Z",
+      "side": 1,
+      "message": "I don\u0027t really speak Maven but it looks good to me.",
+      "revId": "80c347673777c6d64095ca2fdcd9672f517805ef",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
