@@ -16,6 +16,23 @@
       "message": "Same here, looks good to me.",
       "revId": "01be179dd46f07802bb9fb5792c2cd54e7e26b60",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2f88093_e19ecb09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-11-06T21:32:01Z",
+      "side": 1,
+      "message": "Compiling this using JDK 21 fails:\n\n```\r\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.0:compile (default-compile) on project ai-code-review: Fatal error compiling: java.lang.NoSuchFieldError: Class com.sun.tools.javac.tree.JCTree$JCImport does not have member field \u0027com.sun.tools.javac.tree.JCTree qualid\u0027\n```\n\nThis seems to be caused by lombok which supports Java 21 starting from 1.18.30.\nSee https://stackoverflow.com/questions/77171270/compilation-error-after-upgrading-to-jdk-21-nosuchfielderror-jcimport-does-n",
+      "revId": "01be179dd46f07802bb9fb5792c2cd54e7e26b60",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
