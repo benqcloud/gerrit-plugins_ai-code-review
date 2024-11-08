@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baede607_18cb3bfd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-11-08T19:49:31Z",
+      "side": 1,
+      "message": "A much smaller review, to finish / tidy up some last chatGPT specific items, until stateful requests are completed.",
+      "revId": "70b8dbaf0e5f64f02be2b8a9d2145cb2d4b653c7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
