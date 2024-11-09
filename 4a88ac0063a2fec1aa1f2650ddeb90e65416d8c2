@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "780cdc3e_89cd98d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-11-09T20:18:53Z",
+      "side": 1,
+      "message": "`git grep -i gpt` still shows a lot of matches which don\u0027t seem to be ChatGPT specific",
+      "revId": "4a88ac0063a2fec1aa1f2650ddeb90e65416d8c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04cb2d95_019c12aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-11-09T20:18:53Z",
+      "side": 1,
+      "message": "what do you mean by AIChat ?\n- generic term\n- https://github.com/sigoden/aichat\n- https://aichat.com\n- something else ?",
+      "range": {
+        "startLine": 11,
+        "startChar": 42,
+        "endLine": 11,
+        "endChar": 48
+      },
+      "revId": "4a88ac0063a2fec1aa1f2650ddeb90e65416d8c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08a6d97b_018e1528",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/stateful/client/prompt/AIChatGptPromptStatefulBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-11-09T20:18:53Z",
+      "side": 1,
+      "message": "```suggestion\npublic abstract class AIChatPromptStatefulBase extends AIChatPrompt\n```",
+      "revId": "4a88ac0063a2fec1aa1f2650ddeb90e65416d8c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
