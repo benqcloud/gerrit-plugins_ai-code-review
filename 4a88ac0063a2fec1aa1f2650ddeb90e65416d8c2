@@ -175,6 +175,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8092aa5_a28131af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-11-11T14:42:13Z",
+      "side": 1,
+      "message": "Yes it is the OpenAI API, chat endpoint, linked here: \n\nchat endpoint in chatGPT: \nhttps://platform.openai.com/docs/api-reference/chat\n\n\nOpenAI OpenAPI specification ( chat endpoint ):\nhttps://github.com/openai/openai-openapi/blob/master/openapi.yaml#L21\n\nOpenAI ( all endpoints, including chat ) - ollama \nhttps://github.com/ollama/ollama/blob/main/docs/openai.md#v1chatcompletions",
+      "parentUuid": "bf4726e1_59e493e1",
+      "range": {
+        "startLine": 11,
+        "startChar": 42,
+        "endLine": 11,
+        "endChar": 48
+      },
+      "revId": "4a88ac0063a2fec1aa1f2650ddeb90e65416d8c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "08a6d97b_018e1528",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/stateful/client/prompt/AIChatGptPromptStatefulBase.java",
         "patchSetId": 2
