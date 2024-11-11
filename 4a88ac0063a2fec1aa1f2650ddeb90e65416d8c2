@@ -127,6 +127,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6bc99a57_2da3aeaf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-11-11T06:57:09Z",
+      "side": 1,
+      "message": "As stated in previous reviews I don\u0027t get the `chat` part, is there an actual generic AI API that is called `chat`?",
+      "parentUuid": "3f25d325_1c0bd24c",
+      "range": {
+        "startLine": 11,
+        "startChar": 42,
+        "endLine": 11,
+        "endChar": 48
+      },
+      "revId": "4a88ac0063a2fec1aa1f2650ddeb90e65416d8c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "08a6d97b_018e1528",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/stateful/client/prompt/AIChatGptPromptStatefulBase.java",
         "patchSetId": 2
