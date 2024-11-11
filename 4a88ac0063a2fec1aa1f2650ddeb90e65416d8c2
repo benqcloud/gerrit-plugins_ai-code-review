@@ -36,6 +36,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ad67893_4d9674a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-11-11T00:33:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bbd4be2e_e7f61a36",
+      "revId": "4a88ac0063a2fec1aa1f2650ddeb90e65416d8c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04cb2d95_019c12aa",
@@ -83,6 +101,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f25d325_1c0bd24c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-11-11T00:33:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a12a915d_db91bde4",
+      "range": {
+        "startLine": 11,
+        "startChar": 42,
+        "endLine": 11,
+        "endChar": 48
+      },
+      "revId": "4a88ac0063a2fec1aa1f2650ddeb90e65416d8c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08a6d97b_018e1528",
@@ -114,6 +156,24 @@
       "side": 1,
       "message": "I cant change this API yet as it is actually part of the specific stateful API /model used to communicate with ChatGPT.",
       "parentUuid": "08a6d97b_018e1528",
+      "revId": "4a88ac0063a2fec1aa1f2650ddeb90e65416d8c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbc6e343_34219cf3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/stateful/client/prompt/AIChatGptPromptStatefulBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-11-11T00:33:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0db0608d_cea9c70c",
       "revId": "4a88ac0063a2fec1aa1f2650ddeb90e65416d8c2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
