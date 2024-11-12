@@ -197,6 +197,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ed9c1e4_8464f02e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-11-12T07:11:49Z",
+      "side": 1,
+      "message": "Thanks for explaining Trevor.",
+      "parentUuid": "b8092aa5_a28131af",
+      "range": {
+        "startLine": 11,
+        "startChar": 42,
+        "endLine": 11,
+        "endChar": 48
+      },
+      "revId": "4a88ac0063a2fec1aa1f2650ddeb90e65416d8c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08a6d97b_018e1528",
