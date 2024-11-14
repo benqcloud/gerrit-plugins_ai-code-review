@@ -51,7 +51,7 @@ import com.googlesource.gerrit.plugins.aicodereview.config.ConfigCreator;
 import com.googlesource.gerrit.plugins.aicodereview.config.Configuration;
 import com.googlesource.gerrit.plugins.aicodereview.data.PluginDataHandler;
 import com.googlesource.gerrit.plugins.aicodereview.data.PluginDataHandlerProvider;
-import com.googlesource.gerrit.plugins.aicodereview.interfaces.mode.common.client.api.gerrit.GerritClientPatchSet;
+import com.googlesource.gerrit.plugins.aicodereview.interfaces.mode.common.client.api.gerrit.GerritClientPatchSetInfo;
 import com.googlesource.gerrit.plugins.aicodereview.interfaces.mode.common.client.api.openapi.ChatAIClient;
 import com.googlesource.gerrit.plugins.aicodereview.listener.EventHandlerTask;
 import com.googlesource.gerrit.plugins.aicodereview.localization.Localizer;
@@ -61,10 +61,10 @@ import com.googlesource.gerrit.plugins.aicodereview.mode.common.client.api.gerri
 import com.googlesource.gerrit.plugins.aicodereview.mode.common.client.api.gerrit.GerritClientReview;
 import com.googlesource.gerrit.plugins.aicodereview.mode.common.model.data.ChangeSetData;
 import com.googlesource.gerrit.plugins.aicodereview.mode.stateful.client.api.chatai.AIChatClientStateful;
-import com.googlesource.gerrit.plugins.aicodereview.mode.stateful.client.api.gerrit.GerritClientPatchSetStateful;
+import com.googlesource.gerrit.plugins.aicodereview.mode.stateful.client.api.gerrit.GerritClientPatchSetInfoStateful;
 import com.googlesource.gerrit.plugins.aicodereview.mode.stateful.client.api.git.GitRepoFiles;
 import com.googlesource.gerrit.plugins.aicodereview.mode.stateless.client.api.chatai.AIChatClientStateless;
-import com.googlesource.gerrit.plugins.aicodereview.mode.stateless.client.api.gerrit.GerritClientPatchSetStateless;
+import com.googlesource.gerrit.plugins.aicodereview.mode.stateless.client.api.gerrit.GerritClientPatchSetInfoStateless;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
@@ -399,10 +399,10 @@ public class AIChatReviewTestBase extends AIChatTestBase {
     };
   }
 
-  private GerritClientPatchSet getGerritClientPatchSet() {
+  private GerritClientPatchSetInfo getGerritClientPatchSet() {
     return switch (config.getAIMode()) {
-      case stateful -> new GerritClientPatchSetStateful(config, accountCacheMock);
-      case stateless -> new GerritClientPatchSetStateless(config, accountCacheMock);
+      case stateful -> new GerritClientPatchSetInfoStateful(config, accountCacheMock);
+      case stateless -> new GerritClientPatchSetInfoStateless(config, accountCacheMock);
     };
   }
 }
