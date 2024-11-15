@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "447e615d_4bd50f71",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-11-15T11:39:54Z",
+      "side": 1,
+      "message": "nit: remove trailing blank ?",
+      "revId": "b885d755b50d1115422a050f420d6132743f931c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc0438aa_cbe1d995",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-11-15T11:39:54Z",
+      "side": 1,
+      "message": "nit: remove trailing blank ?",
+      "revId": "b885d755b50d1115422a050f420d6132743f931c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
