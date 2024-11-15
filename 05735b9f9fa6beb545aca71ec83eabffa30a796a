@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32abf4c3_b0d9ae6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-11-15T11:10:56Z",
+      "side": 1,
+      "message": "Looks good to me but I think it needs Google-Java-Format.",
+      "revId": "05735b9f9fa6beb545aca71ec83eabffa30a796a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
