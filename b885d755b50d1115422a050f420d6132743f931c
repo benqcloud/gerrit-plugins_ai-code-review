@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b301651f_72ecec15",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-11-15T19:49:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "447e615d_4bd50f71",
+      "revId": "b885d755b50d1115422a050f420d6132743f931c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc0438aa_cbe1d995",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-11-15T11:39:54Z",
       "side": 1,
       "message": "nit: remove trailing blank ?",
+      "revId": "b885d755b50d1115422a050f420d6132743f931c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc1a32df_41f76f7d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-11-15T19:49:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc0438aa_cbe1d995",
       "revId": "b885d755b50d1115422a050f420d6132743f931c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
