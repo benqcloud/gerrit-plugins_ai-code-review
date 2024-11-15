@@ -36,6 +36,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c9f8b94_7680e402",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-11-15T20:03:15Z",
+      "side": 1,
+      "message": "Ive actually just integrated the new spotify maven plugin that automatically formats the code with google-format fules, so this wont happen again... Nice idea, and the build will actually fail now if we submit the code with bad formatting \n( in the verify phase, by default. )",
+      "parentUuid": "7e4d7e06_29ca7b74",
+      "revId": "05735b9f9fa6beb545aca71ec83eabffa30a796a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8534ffda_b00de483",
