@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e4d7e06_29ca7b74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-11-15T19:45:47Z",
+      "side": 1,
+      "message": "I think we should add the formatter as check style set of enforcement rules in the project to auto fail if it doesn\u0027t match.  I\u0027ll raise a ticket to do this in the tracker. And just run it manually against my code to check here.",
+      "parentUuid": "32abf4c3_b0d9ae6c",
+      "revId": "05735b9f9fa6beb545aca71ec83eabffa30a796a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8534ffda_b00de483",
@@ -35,6 +53,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "037eb9bb_357353ab",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/stateful/client/api/gerrit/GerritClientPatchSetInfoStateful.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-11-15T19:45:47Z",
+      "side": 1,
+      "message": "I think it should have api as it\u0027s part of the model api, I did not group it by interfaces it was already grouped like that but I think it\u0027s handy to keep them separate and don\u0027t mind long package names as long as they are descriptive.",
+      "parentUuid": "8534ffda_b00de483",
+      "revId": "05735b9f9fa6beb545aca71ec83eabffa30a796a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7597f18_b810910e",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-11-15T11:50:40Z",
       "side": 1,
       "message": "I would not rename implementation classes, see above",
+      "revId": "05735b9f9fa6beb545aca71ec83eabffa30a796a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4e00834_6a05765c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/stateless/client/api/gerrit/GerritClientPatchSetInfoStateless.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-11-15T19:45:47Z",
+      "side": 1,
+      "message": "The impl classes should not have been renamed, sorry this was refactor renaming the uses again the class should maintain it\u0027s original name I just needed to make the interface different so didn\u0027t want to use Ixxx again.  Fixing now.",
+      "parentUuid": "a7597f18_b810910e",
       "revId": "05735b9f9fa6beb545aca71ec83eabffa30a796a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
