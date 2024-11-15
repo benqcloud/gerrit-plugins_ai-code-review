@@ -16,6 +16,40 @@
       "message": "Looks good to me but I think it needs Google-Java-Format.",
       "revId": "05735b9f9fa6beb545aca71ec83eabffa30a796a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8534ffda_b00de483",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/stateful/client/api/gerrit/GerritClientPatchSetInfoStateful.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-11-15T11:50:40Z",
+      "side": 1,
+      "message": "Why are you also renaming implementation classes ?\nI understand you want to fix the ambiguity by renaming the interface \n\n`com.googlesource.gerrit.plugins.aicodereview.interfaces.mode.common.client.api.gerrit.GerritClientPatchSet`\n\nwhich has the same name as a class in another package.\n\nHence I think it is unnecessary to also rename classes, adding `Info` doesn\u0027t really add useful information to the class name.\n\nunrelated observation: this package name seems overly long and it contains duplicate information, it already has a section `interfaces`, so why do we need another section `api` ?",
+      "revId": "05735b9f9fa6beb545aca71ec83eabffa30a796a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7597f18_b810910e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/stateless/client/api/gerrit/GerritClientPatchSetInfoStateless.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-11-15T11:50:40Z",
+      "side": 1,
+      "message": "I would not rename implementation classes, see above",
+      "revId": "05735b9f9fa6beb545aca71ec83eabffa30a796a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
