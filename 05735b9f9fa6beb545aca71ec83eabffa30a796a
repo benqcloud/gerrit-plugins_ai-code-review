@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "33d9f955_c6fe8b47",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/stateful/client/api/gerrit/GerritClientPatchSetInfoStateful.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2024-11-18T14:34:34Z",
+      "side": 1,
+      "message": "GerritClientPatchSet could be called GerritClientPatchSetBase as it seems to be an abstract which the other 2 concrete types extend to add the full patchset information for stateful / stateless requests.   \nI think a good rename for future change ( I will be reworking stateful requests, so I will consider doing this at the same time. ).",
+      "parentUuid": "b2b0314f_9da31fb7",
+      "range": {
+        "startLine": 36,
+        "startChar": 15,
+        "endLine": 36,
+        "endChar": 39
+      },
+      "revId": "05735b9f9fa6beb545aca71ec83eabffa30a796a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7597f18_b810910e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/stateless/client/api/gerrit/GerritClientPatchSetInfoStateless.java",
         "patchSetId": 2
