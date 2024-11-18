@@ -91,6 +91,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2b0314f_9da31fb7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/stateful/client/api/gerrit/GerritClientPatchSetInfoStateful.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-11-18T09:36:22Z",
+      "side": 1,
+      "message": "**Not related to this change, and only for my benefit:**\nWhen trying to ascertain why `GerritPatchSet` isn\u0027t abstract and what purpose `GerritClientPatchsetInfo` serves I realized I\u0027m not even understanding this...\n\nWhat am I missing? To me it doesn\u0027t look like `GerritClientPatchSetInfoStateful` implements `GerritClientPatchSetInfo`.\nIt hides the `getPatchSet` method but it actually doesn\u0027t override any of the methods from the interface.",
+      "range": {
+        "startLine": 36,
+        "startChar": 15,
+        "endLine": 36,
+        "endChar": 39
+      },
+      "revId": "05735b9f9fa6beb545aca71ec83eabffa30a796a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7597f18_b810910e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/stateless/client/api/gerrit/GerritClientPatchSetInfoStateless.java",
         "patchSetId": 2
