@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5eddf16_ef4c181d",
+        "filename": "pom.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2024-11-18T14:49:18Z",
+      "side": 1,
+      "message": "this seems unrelated and should be moved to another change",
+      "revId": "b02e53261172c6f623ad2620ec0b125380145efa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
