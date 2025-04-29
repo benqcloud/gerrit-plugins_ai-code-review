@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "755e9544_c44e061c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2025-04-29T11:27:40Z",
+      "side": 1,
+      "message": "Simple rollon change to move onto Gerrit 3.12 plugin-api and ready for new feature dev.",
+      "revId": "3c578d660f5da15bba0308869d562f41d12684d9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
