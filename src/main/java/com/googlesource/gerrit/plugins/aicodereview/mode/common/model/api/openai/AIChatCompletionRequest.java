@@ -14,12 +14,21 @@
 
 package com.googlesource.gerrit.plugins.aicodereview.mode.common.model.api.openai;
 
+import com.google.gson.annotations.SerializedName;
+import java.util.List;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-public abstract class AIChatDialogueItem {
-  protected Integer id;
-  protected String filename;
-  protected Integer lineNumber;
-  protected String codeSnippet;
+@Builder
+public class AIChatCompletionRequest {
+  private String model;
+  private boolean stream;
+  private double temperature;
+  private int seed;
+  private List<AIChatRequestMessage> messages;
+  private AIChatTool[] tools;
+
+  @SerializedName("tool_choice")
+  private AIChatToolChoice toolChoice;
 }

@@ -12,20 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.googlesource.gerrit.plugins.aicodereview.mode.common.client.api.gerrit;
+package com.googlesource.gerrit.plugins.aicodereview.interfaces.mode.common.client.api.gerrit;
 
-import com.googlesource.gerrit.plugins.aicodereview.config.Configuration;
-import com.googlesource.gerrit.plugins.aicodereview.mode.common.client.ClientBase;
+import com.googlesource.gerrit.plugins.aicodereview.mode.common.client.api.gerrit.GerritChange;
 import com.googlesource.gerrit.plugins.aicodereview.mode.common.client.patch.diff.FileDiffProcessed;
+import com.googlesource.gerrit.plugins.aicodereview.mode.common.model.data.ChangeSetData;
 import java.util.HashMap;
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
-public abstract class GerritClientBase extends ClientBase {
-  @Getter protected HashMap<String, FileDiffProcessed> fileDiffsProcessed = new HashMap<>();
+public interface GerritClientPatchSetInfo {
+  String getPatchSet(ChangeSetData changeSetData, GerritChange gerritChange) throws Exception;
 
-  public GerritClientBase(Configuration config) {
-    super(config);
-  }
+  boolean isDisabledUser(String authorUsername);
+
+  boolean isDisabledTopic(String topic);
+
+  void retrieveRevisionBase(GerritChange change);
+
+  Integer getNotNullAccountId(String authorUsername);
+
+  HashMap<String, FileDiffProcessed> getFileDiffsProcessed();
+
+  Integer getRevisionBase();
 }
