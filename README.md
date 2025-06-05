@@ -12,7 +12,7 @@ common between chatGPT and other private AI service providers.
 ## Features
 
 This plugin allows you to use different AI Chat services, e.g. ChatGPT or OLLAMA for code review in Gerrit conveniently.
-After submitting a Patch Set, OpenAI will provide review feedback in the form of comments and, optionally, a vote.
+After submitting a Patch Set, the AI Service will provide review feedback in the form of comments and, optionally, a vote.
 You can continue to ask the AI Chat by @{gerritUserName} or @{gerritEmailAddress} (provided that `gerritEmailAddress` is in
 the form "gerritUserName@<any_email_domain>") in the comments to further guide it in generating more targeted review
 comments.
