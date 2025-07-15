@@ -43,10 +43,19 @@ public class AIChatParameters extends ClientBase {
   }
 
   public int getRandomSeed() {
+    if (retrieveMistralCompatibility()) {
+      // Mistral models require a positive random seed (>=0).
+      return ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
+    }
     return ThreadLocalRandom.current().nextInt();
   }
 
   private Double retrieveTemperature(String temperatureKey, Double defaultTemperature) {
     return Double.parseDouble(config.getString(temperatureKey, String.valueOf(defaultTemperature)));
+  }
+
+  private boolean retrieveMistralCompatibility() {
+    return Boolean.parseBoolean(
+        config.getString(Configuration.KEY_AI_MISTRAL_COMPATIBILITY, "false"));
   }
 }

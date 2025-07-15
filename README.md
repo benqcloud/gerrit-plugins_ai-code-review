@@ -271,6 +271,7 @@ value is false). When set to true, it enables commands and options like `--debug
 Configuration commands.
 - `forceCreateAssistant`: In Stateful mode, forces the creation of a new assistant with each request instead of only
 when configuration settings change or Changes are merged.
+- `mistralCompatibleSeed`: Mistral requires a positive seed for deterministic results. Defaults to false.
 
   **NOTE**: This option may increase OpenAI API usage and should be used for **testing or debugging purposes only**.
 
