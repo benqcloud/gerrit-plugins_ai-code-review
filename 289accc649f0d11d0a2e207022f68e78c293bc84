@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2df65069_feca8a66",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/config/Configuration.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1063455
+      },
+      "writtenOn": "2025-07-15T15:10:16Z",
+      "side": 1,
+      "message": "Can we take this member / configuration and make it more generic, as there may well be other LLMs and providers that require a positive seed.\n\nI would prefer that we use the name \"aiUsePositiveSeed\", so any ai provider can use this and we do not make a suggestion that it is specific to mistral.\nOf course, follow this through to the README.md, but feel free to use \"mistral\" as an example that requires a positive seed. \n\nThis would be inline with other changes in the pipeline, e.g.\nthere is a requirement for Gemini to use no seed, so we may introduce a \"aiUseNoSeed\" configuration later on, so it would be good to help group these options.",
+      "revId": "289accc649f0d11d0a2e207022f68e78c293bc84",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
