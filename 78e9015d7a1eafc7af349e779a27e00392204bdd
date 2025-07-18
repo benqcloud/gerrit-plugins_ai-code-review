@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c45cb56d_232e3473",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1071857
+      },
+      "writtenOn": "2025-07-18T13:59:11Z",
+      "side": 1,
+      "message": "@trevor.getty@cirata.com Sorry for the duplicate, but I don\u0027t think gerrit-review allows moving reviews.\n\nTo prevent potential cherry-pick port-back/forwards resolve shenanigans I generated a new changeId.",
+      "revId": "78e9015d7a1eafc7af349e779a27e00392204bdd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
