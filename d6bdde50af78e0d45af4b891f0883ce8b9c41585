@@ -16,6 +16,24 @@
       "message": "```\n[INFO] Results:\n[INFO] \n[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0\n```",
       "revId": "d6bdde50af78e0d45af4b891f0883ce8b9c41585",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e6925f7_c5d467b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1071857
+      },
+      "writtenOn": "2025-07-22T10:16:31Z",
+      "side": 1,
+      "message": "Oh, and\n\n```\n[INFO] Building jar: .../gerrit/plugins/ai-code-review/target/ai-code-review-3.12.0.jar\n...\n[INFO] ------------------------------------------------------------------------\n[INFO] BUILD SUCCESS\n[INFO] ------------------------------------------------------------------------\n[INFO] Total time:  15.279 s\n[INFO] Finished at: 2025-07-22T12:14:48+02:00\n[INFO] ------------------------------------------------------------------------\n```",
+      "parentUuid": "d9af6497_55dc3074",
+      "revId": "d6bdde50af78e0d45af4b891f0883ce8b9c41585",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
