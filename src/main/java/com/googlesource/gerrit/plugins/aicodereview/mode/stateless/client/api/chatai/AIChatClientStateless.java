@@ -60,8 +60,7 @@ public class AIChatClientStateless extends AIChatClient implements ChatAIClient 
       ChangeSetData changeSetData, GerritChange change, String patchSet) throws Exception {
     isCommentEvent = change.getIsCommentEvent();
     String changeId = change.getFullChangeId();
-    log.info(
-        "Processing STATELESS AIChat Request with changeId: {}, Patch Set: {}", changeId, patchSet);
+    log.info("Processing STATELESS AIChat Request with changeId: {}", changeId);
     for (int attemptInd = 0; attemptInd < REVIEW_ATTEMPT_LIMIT; attemptInd++) {
       HttpRequest request = createRequest(config, changeSetData, patchSet);
       log.debug("AIChat request: {}", request.toString());
@@ -129,7 +128,7 @@ public class AIChatClientStateless extends AIChatClient implements ChatAIClient 
             // Seed value is Utilized to prevent ChatGPT from mixing up separate API calls that
             // occur in close
             // temporal proximity.
-            .seed(AIChatParameters.getRandomSeed())
+            // .seed(AIChatParameters.getRandomSeed())
             .tools(tools)
             .toolChoice(AIChatTools.retrieveFormatRepliesToolChoice())
             .build();

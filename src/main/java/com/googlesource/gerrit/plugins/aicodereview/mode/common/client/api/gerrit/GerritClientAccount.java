@@ -83,17 +83,34 @@ public class GerritClientAccount extends GerritClientBase {
   private boolean isDisabledUserGroup(String authorUsername) {
     List<String> enabledGroups = config.getEnabledGroups();
     List<String> disabledGroups = config.getDisabledGroups();
+
+    log.debug("enabledGroups: {}", enabledGroups);
+    log.debug("disabledGroups: {}", disabledGroups);
+
     if (enabledGroups.isEmpty() && disabledGroups.isEmpty()) {
+      log.debug("No enabled/disabled groups configured.");
       return false;
     }
+
     Optional<Integer> accountId = getAccountId(authorUsername);
+    log.debug("accountId for {}: {}", authorUsername, accountId);
     if (accountId.isEmpty()) {
-      return false;
+      log.warn("No account ID found for user {}. Disabling user as precaution.", authorUsername);
+      return true;
     }
+
     List<String> accountGroups = getAccountGroups(accountId.orElse(-1));
+    log.debug("accountGroups: {}", accountGroups);
     if (accountGroups == null || accountGroups.isEmpty()) {
-      return false;
+      if (!enabledGroups.isEmpty()) {
+        log.warn(
+            "enabledGroups is set and user {} is in no group. Disabling user.", authorUsername);
+      } else {
+        log.warn("User {} not in any groups. Disabling user as precaution.", authorUsername);
+      }
+      return true;
     }
+
     return !enabledGroups.contains(Configuration.ENABLED_GROUPS_ALL)
             && enabledGroups.stream().noneMatch(accountGroups::contains)
         || disabledGroups.stream().anyMatch(accountGroups::contains);

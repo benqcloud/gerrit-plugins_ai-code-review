@@ -25,7 +25,7 @@ public class AIChatCompletionRequest {
   private String model;
   private boolean stream;
   private double temperature;
-  private int seed;
+  // private int seed;
   private List<AIChatRequestMessage> messages;
   private AIChatTool[] tools;
 
