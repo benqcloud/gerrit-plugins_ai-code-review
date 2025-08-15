@@ -65,7 +65,7 @@ public class EventHandlerTypePatchSetReview implements IEventHandlerType {
   }
 
   private boolean isPatchSetReviewEnabled(GerritChange change) {
-    if (!config.getAIReviewPatchSet()) {
+    if (!changeSetData.getForcedReview() && !config.getAIReviewPatchSet()) {
       log.debug("Disabled review function for created or updated PatchSets.");
       return false;
     }
