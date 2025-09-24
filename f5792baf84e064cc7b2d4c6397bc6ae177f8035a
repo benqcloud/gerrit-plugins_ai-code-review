@@ -16,6 +16,24 @@
       "message": "We\u0027ve got this running on production now, looks stable.",
       "revId": "f5792baf84e064cc7b2d4c6397bc6ae177f8035a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59c5dc97_69eb4c11",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/aicodereview/mode/stateful/client/api/chatgpt/ChatGptAssistant.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 4373441
+      },
+      "writtenOn": "2025-09-24T15:02:06Z",
+      "side": 1,
+      "message": "This looks fine.",
+      "parentUuid": "1dfd5b6e_aa560131",
+      "revId": "f5792baf84e064cc7b2d4c6397bc6ae177f8035a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
