@@ -169,7 +169,13 @@ public class AIChatReviewTestBase extends AIChatTestBase {
   protected void initConfig() {
     config =
         new Configuration(
-            context, gerritApi, globalConfig, projectConfig, "gpt@email.com", Account.id(1000000));
+            context,
+            gerritApi,
+            globalConfig,
+            globalConfig,
+            projectConfig,
+            "gpt@email.com",
+            Account.id(1000000));
   }
 
   protected void setupMockRequests() throws RestApiException {

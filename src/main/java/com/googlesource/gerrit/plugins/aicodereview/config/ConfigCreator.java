@@ -68,11 +68,33 @@ public class ConfigCreator {
 
   public Configuration createConfig(Project.NameKey projectName, Change.Key changeKey)
       throws NoSuchProjectException {
+    log.error(
+        "ABSOLUTE FIRST LINE: createConfig() called - if you see this, the new code is running!");
     PluginConfig globalConfig = configFactory.getFromGerritConfig(pluginName);
-    log.debug(
+    log.error(
+        "DEBUG: ConfigCreator.createConfig() method started for project: {}, change: {}",
+        projectName,
+        changeKey);
+    log.error(
         "These configuration items have been set in the global configuration: {}",
         globalConfig.getNames());
+    PluginConfig pluginConfig =
+        PluginConfig.create(pluginName, configFactory.getGlobalPluginConfig(pluginName), null);
+    log.info(
+        "These configuration items have been set in the plugin configuration: {}",
+        pluginConfig.getNames());
     PluginConfig projectConfig = configFactory.getFromProjectConfig(projectName, pluginName);
+    log.info(
+        "Global config names: {}, Project config names: {}",
+        globalConfig.getNames(), projectConfig.getNames());
+    
+    // Debug: Show actual config values
+    for (String key : globalConfig.getNames()) {
+      log.info("Global config - {}: {}", key, globalConfig.getString(key));
+    }
+    for (String key : projectConfig.getNames()) {
+      log.info("Project config - {}: {}", key, projectConfig.getString(key));
+    }
     log.debug(
         "These configuration items have been set in the project configuration: {}",
         projectConfig.getNames());
@@ -94,16 +116,33 @@ public class ConfigCreator {
         codeReviewAccount
             .map(a -> a.account().id())
             .orElseThrow(
-                () ->
-                    new RuntimeException(
-                        String.format(
-                            "Given account %s doesn't exist",
-                            globalConfig.getString(Configuration.KEY_GERRIT_USERNAME))));
-    return new Configuration(context, gerritApi, globalConfig, projectConfig, email, accountId);
+                () -> {
+                  String configuredUsername =
+                      globalConfig.getString(Configuration.KEY_GERRIT_USERNAME);
+                  String errorMsg =
+                      configuredUsername == null || configuredUsername.trim().isEmpty()
+                          ? String.format(
+                              "Configuration key '%s' is not set. Please configure the Gerrit username for the AI code review plugin.",
+                              Configuration.KEY_GERRIT_USERNAME)
+                          : String.format(
+                              "Account '%s' doesn't exist. Please check the '%s' configuration.",
+                              configuredUsername, Configuration.KEY_GERRIT_USERNAME);
+                  log.error(errorMsg);
+                  return new RuntimeException(errorMsg);
+                });
+    return new Configuration(
+        context, gerritApi, globalConfig, pluginConfig, projectConfig, email, accountId);
   }
 
   private Optional<AccountState> getAccount(PluginConfig globalConfig) {
     String codeReviewUser = globalConfig.getString(Configuration.KEY_GERRIT_USERNAME);
+    if (codeReviewUser == null || codeReviewUser.trim().isEmpty()) {
+      log.error(
+          "Configuration key '{}' is not set or is empty. Please configure the Gerrit username for the AI code review plugin.",
+          Configuration.KEY_GERRIT_USERNAME);
+      return Optional.empty();
+    }
+    log.debug("Looking up account for user: {}", codeReviewUser);
     return accountCache.getByUsername(codeReviewUser);
   }
 

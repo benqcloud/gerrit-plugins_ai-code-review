@@ -138,6 +138,7 @@ public class Configuration {
   private final OneOffRequestContext context;
   @Getter private final Account.Id userId;
   @Getter private final PluginConfig globalConfig;
+  @Getter private final PluginConfig pluginConfig;
   @Getter private final PluginConfig projectConfig;
   @Getter private final String gerritUserEmail;
   @Getter private final GerritApi gerritApi;
@@ -146,12 +147,14 @@ public class Configuration {
       OneOffRequestContext context,
       GerritApi gerritApi,
       PluginConfig globalConfig,
+      PluginConfig pluginConfig,
       PluginConfig projectConfig,
       String gerritUserEmail,
       Account.Id userId) {
     this.context = context;
     this.gerritApi = gerritApi;
     this.globalConfig = globalConfig;
+    this.pluginConfig = pluginConfig;
     this.projectConfig = projectConfig;
     this.gerritUserEmail = gerritUserEmail;
     this.userId = userId;
@@ -368,11 +371,18 @@ public class Configuration {
     if (value != null) {
       return value;
     }
+    value = pluginConfig.getString(key);
+    if (value != null) {
+      return value;
+    }
     return globalConfig.getString(key, defaultValue);
   }
 
   private String getValidatedOrThrow(String key) {
     String value = projectConfig.getString(key);
+    if (value == null) {
+      value = pluginConfig.getString(key);
+    }
     if (value == null) {
       value = globalConfig.getString(key);
     }
@@ -392,6 +402,14 @@ public class Configuration {
         && projectConfig.getString(key, "") != null) {
       return valueForProject;
     }
+
+    int valueForPlugin = pluginConfig.getInt(key, defaultValue);
+    if (valueForPlugin != defaultValue
+        && valueForPlugin != 0
+        && pluginConfig.getString(key, "") != null) {
+      return valueForPlugin;
+    }
+
     return globalConfig.getInt(key, defaultValue);
   }
 
@@ -400,6 +418,12 @@ public class Configuration {
     if (projectConfig.getString(key) != null) {
       return valueForProject;
     }
+
+    boolean valueForPlugin = pluginConfig.getBoolean(key, defaultValue);
+    if (pluginConfig.getString(key) != null) {
+      return valueForPlugin;
+    }
+
     return globalConfig.getBoolean(key, defaultValue);
   }
 

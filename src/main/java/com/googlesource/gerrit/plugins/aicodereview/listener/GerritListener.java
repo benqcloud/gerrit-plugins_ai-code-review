@@ -58,12 +58,20 @@ public class GerritListener implements EventListener {
     }
 
     log.info("Processing event: {}", event);
+    log.error("STEP 1: About to cast event to PatchSetEvent");
     PatchSetEvent patchSetEvent = (PatchSetEvent) event;
+    log.error("STEP 2: Cast successful, about to call getProjectNameKey()");
     Project.NameKey projectNameKey = patchSetEvent.getProjectNameKey();
+    log.error(
+        "STEP 3: getProjectNameKey() successful: {}, about to call getChangeKey()", projectNameKey);
     Change.Key changeKey = patchSetEvent.getChangeKey();
+    log.error("STEP 4: getChangeKey() successful: {}, about to enter try block", changeKey);
 
     try {
+      log.error(
+          "GERRIT LISTENER: About to call configCreator.createConfig() - new code is running!");
       Configuration config = configCreator.createConfig(projectNameKey, changeKey);
+      log.error("GERRIT LISTENER: configCreator.createConfig() completed successfully!");
       evenHandlerExecutor.execute(config, patchSetEvent);
     } catch (NoSuchProjectException e) {
       log.error("Project not found: {}", projectNameKey, e);
