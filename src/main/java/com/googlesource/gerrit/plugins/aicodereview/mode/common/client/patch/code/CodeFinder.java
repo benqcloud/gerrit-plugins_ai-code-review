@@ -68,7 +68,214 @@ public class CodeFinder {
       }
     }
 
+    if (closestCodeRange == null) {
+      log.error("\nfindCommentedCode: CTCSOC proprietary approach, across diffs\n");
+      findCodeLinesAcrossDiffs();
+    }
+    if (closestCodeRange == null) {
+      log.error("\nfindCommentedCode: CTCSOC proprietary approach, commentedLine\n");
+      return createCodeRangeFromCommentedLine(commentedLine);
+    }
+
+    log.error("\nfindCommentedCode: Google community approach, diffs each by each\n");
     return closestCodeRange;
+  }
+
+  /** Attempts to find code that spans across multiple CodeFinderDiff pieces */
+  private void findCodeLinesAcrossDiffs() {
+    if (codeFinderDiffs.size() < 2) {
+      return; // Need at least 2 diffs for cross-diff matching
+    }
+
+    // Build combined content from consecutive diffs
+    for (int i = 0; i < codeFinderDiffs.size() - 1; i++) {
+      for (int j = i + 1; j < codeFinderDiffs.size(); j++) {
+        String combinedDiffCode = buildCombinedDiffCode(i, j);
+        TreeMap<Integer, Integer> combinedCharToLineMap = buildCombinedCharToLineMap(i, j);
+
+        if (combinedDiffCode != null && combinedCharToLineMap != null) {
+          try {
+            findCodeLines(combinedDiffCode, combinedCharToLineMap);
+            // If we found a match in this combined range, we can stop
+            if (closestCodeRange != null) {
+              return;
+            }
+          } catch (IllegalArgumentException e) {
+            log.warn("Could not retrieve line number from combined charToLineMap", e);
+          }
+        }
+      }
+    }
+  }
+
+  /** Builds combined diff code from a range of CodeFinderDiffs */
+  private String buildCombinedDiffCode(int startIdx, int endIdx) {
+    StringBuilder combinedCode = new StringBuilder();
+
+    for (int i = startIdx; i <= endIdx; i++) {
+      CodeFinderDiff diff = codeFinderDiffs.get(i);
+      String diffCode = getFirstDiffCode(diff);
+      if (diffCode != null) {
+        combinedCode.append(diffCode);
+        // Add a newline between diffs to maintain proper line counting
+        if (i < endIdx) {
+          combinedCode.append("\n");
+        }
+      }
+    }
+
+    return combinedCode.length() > 0 ? combinedCode.toString() : null;
+  }
+
+  /** Builds combined charToLineMap from a range of CodeFinderDiffs */
+  private TreeMap<Integer, Integer> buildCombinedCharToLineMap(int startIdx, int endIdx) {
+    TreeMap<Integer, Integer> combinedMap = new TreeMap<>();
+    int currentCharOffset = 0;
+
+    for (int i = startIdx; i <= endIdx; i++) {
+      CodeFinderDiff diff = codeFinderDiffs.get(i);
+      TreeMap<Integer, Integer> diffMap = diff.getCharToLineMap();
+
+      if (diffMap != null) {
+        for (java.util.Map.Entry<Integer, Integer> entry : diffMap.entrySet()) {
+          // Adjust character positions by the current offset
+          combinedMap.put(entry.getKey() + currentCharOffset, entry.getValue());
+        }
+
+        // Update offset for next diff (include the newline we added)
+        String diffCode = getFirstDiffCode(diff);
+        if (diffCode != null) {
+          currentCharOffset += diffCode.length() + 1; // +1 for the newline
+        }
+      }
+    }
+
+    return combinedMap.isEmpty() ? null : combinedMap;
+  }
+
+  /** Gets the first available diff code from a CodeFinderDiff */
+  private String getFirstDiffCode(CodeFinderDiff codeFinderDiff) {
+    for (Field diffField : DiffContent.class.getDeclaredFields()) {
+      String diffCode = getDiffItem(diffField, codeFinderDiff.getContent());
+      if (diffCode != null) {
+        return diffCode;
+      }
+    }
+    return null;
+  }
+
+  private Integer findClosestValidLine(int targetLine) {
+    Integer closestLine = null;
+    int minDistance = Integer.MAX_VALUE;
+
+    for (CodeFinderDiff codeFinderDiff : codeFinderDiffs) {
+      TreeMap<Integer, Integer> charToLineMap = codeFinderDiff.getCharToLineMap();
+      if (charToLineMap != null && !charToLineMap.isEmpty()) {
+        for (Integer lineNumber : charToLineMap.values()) {
+          int distance = Math.abs(lineNumber - targetLine);
+          if (distance < minDistance) {
+            minDistance = distance;
+            closestLine = lineNumber;
+          }
+        }
+      }
+    }
+
+    return closestLine;
+  }
+
+  private GerritCodeRange createCodeRangeFromCommentedLine(int commentedLine) {
+    Integer closestValidLine = findClosestValidLine(commentedLine);
+
+    if (closestValidLine != null) {
+      // Find the exact character positions for this line in the code snippets
+      CharacterRange charRange = findCharacterRangeForLine(closestValidLine);
+
+      if (charRange != null) {
+        return GerritCodeRange.builder()
+            .startLine(closestValidLine)
+            .endLine(closestValidLine)
+            .startCharacter(charRange.startChar)
+            .endCharacter(charRange.endChar)
+            .build();
+      } else {
+        // Fallback if we can't find exact character positions
+        return GerritCodeRange.builder()
+            .startLine(closestValidLine)
+            .endLine(closestValidLine)
+            .startCharacter(0)
+            .endCharacter(1) // At least 1 character wide for visibility
+            .build();
+      }
+    }
+
+    log.warn("No valid lines found in diff, using commented line {} as fallback", commentedLine);
+    return GerritCodeRange.builder()
+        .startLine(commentedLine)
+        .endLine(commentedLine)
+        .startCharacter(0)
+        .endCharacter(1)
+        .build();
+  }
+
+  /** Finds the exact character range for a given line number across all code snippets */
+  private CharacterRange findCharacterRangeForLine(int targetLine) {
+    for (CodeFinderDiff codeFinderDiff : codeFinderDiffs) {
+      TreeMap<Integer, Integer> charToLineMap = codeFinderDiff.getCharToLineMap();
+      String diffCode = getFirstDiffCode(codeFinderDiff);
+
+      if (charToLineMap != null && diffCode != null) {
+        // Find the character positions that map to this line
+        Integer lineStartChar = null;
+        Integer lineEndChar = null;
+
+        for (java.util.Map.Entry<Integer, Integer> entry : charToLineMap.entrySet()) {
+          if (entry.getValue() == targetLine) {
+            if (lineStartChar == null) {
+              lineStartChar = entry.getKey();
+            }
+            lineEndChar = entry.getKey();
+          } else if (lineStartChar != null) {
+            // We've moved to the next line, so break
+            break;
+          }
+        }
+
+        if (lineStartChar != null) {
+          // Calculate the actual end of the line
+          int actualLineEnd = findLineEndPosition(diffCode, lineStartChar);
+          return new CharacterRange(lineStartChar, actualLineEnd);
+        }
+      }
+    }
+
+    return null;
+  }
+
+  /** Finds the end position of a line starting from a given character position */
+  private int findLineEndPosition(String diffCode, int startPosition) {
+    if (startPosition >= diffCode.length()) {
+      return startPosition;
+    }
+
+    // Find the next newline character or end of string
+    int newlinePos = diffCode.indexOf('\n', startPosition);
+    if (newlinePos == -1) {
+      return diffCode.length() - 1;
+    }
+
+    return newlinePos;
+  }
+
+  /** Helper class to store character range */
+  private static class CharacterRange {
+    final int startChar;
+    final int endChar;
+
+    CharacterRange(int startChar, int endChar) {
+      this.startChar = startChar;
+      this.endChar = endChar;
+    }
   }
 
   private void updateCodePattern(AIChatReplyItem replyItem) {
