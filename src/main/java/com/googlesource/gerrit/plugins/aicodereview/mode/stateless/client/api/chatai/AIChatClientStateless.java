@@ -120,19 +120,24 @@ public class AIChatClientStateless extends AIChatClient implements ChatAIClient 
 
     AIChatParameters AIChatParameters = new AIChatParameters(config, isCommentEvent);
     AIChatTool[] tools = new AIChatTool[] {AIChatTools.retrieveFormatRepliesTool()};
-    AIChatCompletionRequest chatGptCompletionRequest =
+    Integer seedValue = AIChatParameters.getRandomSeed();
+    AIChatCompletionRequest.AIChatCompletionRequestBuilder builder =
         AIChatCompletionRequest.builder()
             .model(config.getAIModel())
             .messages(List.of(systemMessage, userMessage))
             .temperature(AIChatParameters.getGptTemperature())
             .stream(AIChatParameters.getStreamOutput())
-            // Seed value is Utilized to prevent ChatGPT from mixing up separate API calls that
-            // occur in close
-            // temporal proximity.
-            .seed(AIChatParameters.getRandomSeed())
             .tools(tools)
-            .toolChoice(AIChatTools.retrieveFormatRepliesToolChoice())
-            .build();
+            .toolChoice(AIChatTools.retrieveFormatRepliesToolChoice());
+
+    // Use random_seed for Mistral compatibility, otherwise use seed
+    if (config.getMistralCompat()) {
+      builder.randomSeed(seedValue);
+    } else {
+      builder.seed(seedValue);
+    }
+
+    AIChatCompletionRequest chatGptCompletionRequest = builder.build();
 
     return getNoEscapedGson().toJson(chatGptCompletionRequest);
   }

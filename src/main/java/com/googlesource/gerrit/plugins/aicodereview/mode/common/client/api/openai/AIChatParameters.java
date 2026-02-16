@@ -42,7 +42,7 @@ public class AIChatParameters extends ClientBase {
     return config.getAIStreamOutput() && !isCommentEvent;
   }
 
-  public int getRandomSeed() {
+  public Integer getRandomSeed() {
     if (retrieveUsePositiveSeedOnly()) {
       return ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
     }

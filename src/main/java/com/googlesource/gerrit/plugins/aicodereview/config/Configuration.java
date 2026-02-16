@@ -86,6 +86,7 @@ public class Configuration {
   private static final boolean DEFAULT_IGNORE_RESOLVED_AI_CHAT_COMMENTS = true;
   private static final boolean DEFAULT_FORCE_CREATE_ASSISTANT = false;
   private static final boolean DEFAULT_ENABLE_MESSAGE_DEBUGGING = false;
+  private static final boolean DEFAULT_MISTRAL_COMPAT = false;
 
   public static final String AUTH_HEADER_API_KEY = "api-key";
 
@@ -95,6 +96,7 @@ public class Configuration {
   public static final String KEY_AI_REVIEW_TEMPERATURE = "aiReviewTemperature";
   public static final String KEY_AI_COMMENT_TEMPERATURE = "aiCommentTemperature";
   public static final String KEY_AI_POSITIVE_SEED_ONLY = "aiUsePositiveSeed";
+  public static final String KEY_AI_MISTRAL_COMPAT = "aiMistralCompat";
   public static final String KEY_VOTING_MIN_SCORE = "votingMinScore";
   public static final String KEY_VOTING_MAX_SCORE = "votingMaxScore";
   public static final String KEY_GERRIT_USERNAME = "gerritUserName";
@@ -341,6 +343,10 @@ public class Configuration {
 
   public boolean getIgnoreOutdatedInlineComments() {
     return getBoolean(KEY_IGNORE_OUTDATED_INLINE_COMMENTS, DEFAULT_IGNORE_OUTDATED_INLINE_COMMENTS);
+  }
+
+  public boolean getMistralCompat() {
+    return getBoolean(KEY_AI_MISTRAL_COMPAT, DEFAULT_MISTRAL_COMPAT);
   }
 
   public NameValuePair getAuthorizationHeaderInfo() {
