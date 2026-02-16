@@ -60,7 +60,9 @@ public class HttpClientWithRetry {
                   if (response.statusCode() != HTTP_OK) {
                     log.error(
                         "Retry because HTTP status code is not 200. The status code is: "
-                            + response.statusCode());
+                            + response.statusCode()
+                            + ". Response body: "
+                            + response.body());
                     return true;
                   } else {
                     return false;
