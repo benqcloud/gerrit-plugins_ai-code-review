@@ -25,7 +25,11 @@ public class AIChatCompletionRequest {
   private String model;
   private boolean stream;
   private double temperature;
-  private int seed;
+  private Integer seed;
+
+  @SerializedName("random_seed")
+  private Integer randomSeed;
+
   private List<AIChatRequestMessage> messages;
   private AIChatTool[] tools;
 

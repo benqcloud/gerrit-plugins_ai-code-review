@@ -272,6 +272,9 @@ Configuration commands.
 - `forceCreateAssistant`: In Stateful mode, forces the creation of a new assistant with each request instead of only
 when configuration settings change or Changes are merged.
 - `aiUsePositiveSeed`: Only generate positive seeds, this is needed for some models, f.i Mistral. Defaults to false.
+- `aiMistralCompat`: Enables Mistral API compatibility mode. When enabled, the seed parameter is serialized as
+`random_seed` (instead of `seed`) and restricted to positive values only, as required by Mistral's API. Defaults to
+false.
 
   **NOTE**: This option may increase OpenAI API usage and should be used for **testing or debugging purposes only**.
 

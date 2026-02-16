@@ -42,8 +42,8 @@ public class AIChatParameters extends ClientBase {
     return config.getAIStreamOutput() && !isCommentEvent;
   }
 
-  public int getRandomSeed() {
-    if (retrieveUsePositiveSeedOnly()) {
+  public Integer getRandomSeed() {
+    if (retrieveUsePositiveSeedOnly() || config.getMistralCompat()) {
       return ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
     }
     return ThreadLocalRandom.current().nextInt();
